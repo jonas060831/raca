@@ -135,6 +135,34 @@ const Home = () => {
 
           </section>
 
+
+
+          <section className={styles.requesAFreeQuote}>
+
+                <button onClick={ () => router.push('/contactus') }>
+                    REQUEST A FREE <br /> QUOTE
+                </button>
+
+          </section>
+          
+
+          <section>
+
+                  <div className={styles.notice1}>
+                      <p>
+                      Advance booking is recommended as we get fully booked ahead of time especially during weekends.
+                      </p>
+                  </div>
+
+
+                  <div className={styles.notice2}>
+                      <p>
+                      If you have questions, concerns or for quotations please do not hesitate to email us at rentacoolair@gmail.com or call us at the numbers posted below and let us know how we can help.
+                      </p>
+                  </div>
+
+          </section>
+
                 
         </main>
 
