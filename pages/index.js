@@ -11,7 +11,7 @@ const phd = [
     id: 1,
     title: "Its not just a regular fan",
     description: "Its not just a fan but it’s an Evaporative Air cooler guaranteed to blast cooler air and give comfort to your guests on special events.",
-    image: "/product-highlight/fan+guy.png"
+    image: "/product-highlight/fan_guy.png"
   },
   {
     id: 2,
@@ -23,7 +23,7 @@ const phd = [
     id: 3,
     title: "Controlled Temperature Gaurenteed",
     description: "Iwata Evaporative Air Cooler will certainly bring down the air temperature lesser by about 5 degrees compared to any industrial fan.",
-    image: "/product-highlight/fan+ice.png"
+    image: "/product-highlight/fan_ice.png"
   },
   {
     id: 4,
