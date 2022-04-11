@@ -1,0 +1,95 @@
+
+
+/* Desktop and iPads */
+
+.nav {
+    width: 100%;
+    font-weight: 400;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav ul {
+    margin-top: 0px;
+    padding: 0;
+}
+
+.nav ul li {
+    display: inline-block;
+    list-style: none;
+    background: var(--primary-color);
+    color: var(--secondary-color);
+    margin: 30px 40px 30px 0px;
+    cursor: pointer;
+}
+/* mode changer */
+.nav ul li:nth-child(5){ margin: 30px 0px 30px 0px; }
+
+.nav ul li:hover  { color: grey; }
+
+.container {
+    /* this should be same as container */
+    width: 80%;
+    max-width: 1300px;
+    margin: 0px auto;
+}
+
+/* hamburger */
+.openMenu {
+    display: none;
+    cursor: pointer;
+}
+
+ /* close button */
+.mainMenu .closeMenu , .icons i {
+    display: none;
+    cursor: pointer;
+}
+
+
+
+/* Mobile */
+@media only screen and (max-width: 600px) {
+    .nav {
+      width: 100%;
+    }
+    .container {
+        /* this should be same as container */
+        width: 100%;
+    }
+    .nav ul li {
+        display:block;
+        margin-top: 4.5em; /* must be the same*/
+        text-align: center;
+        margin-right: 0px;
+        color: var(--secondary-color)
+    }
+    .nav ul li:nth-child(5) {
+        margin-top: 4.5em; /* must be the same*/
+        width: 100%;
+    }
+    .nav .mainMenu {
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 2;
+        background: var(--primary-color);
+        color: var(--secondary-color);
+        transition: top 1s ease;
+        display: none;
+    }
+    .mainMenu .closeMenu {
+        display: block;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+    .nav .openMenu {
+        display: block;
+        padding: 1em 1em 1em 1em;
+        text-align: right;
+    }
+    .openMenu:active { color: red; }
+  }
