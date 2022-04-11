@@ -13,11 +13,9 @@
   text-align: center;
 }
 
-.main {
-  /* padding: 5rem 0; */
-  padding: 15rem 0;
-  background-color: blue;
-}
+/* .main {
+  padding: 5rem 0;
+} */
 
 #companyLogo {
   width: 20%;
@@ -28,6 +26,66 @@
   font-size: 3.5rem;
   font-weight: bold;
 }
+
+.productTraits {
+  margin-top: 20vh;
+  line-height: 2em;
+}
+
+.productTraits h1, .productTraits h3 {
+  text-align: center;
+}
+
+.productHighlightGrid {
+  display: grid;
+  grid-template-columns: auto auto;
+  margin: 1rem 1rem 1rem 1rem;
+  gap: 2rem;
+}
+
+
+.imageContainer {
+  width:20rem; 
+  height:20rem;
+  overflow:hidden;
+  display:inline-block;
+  position:relative;
+}
+.imageContainer img {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+#phdTitle {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+
+.serviceOffered {
+  
+  margin: 1em 1em 1em 1em;
+  margin-top: 50vh;
+}
+
+
+.serviceGrid {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+}
+
+.serviceOfferedCard {
+  text-align: center;
+  cursor: pointer;
+}
+
+.serviceOfferedCard img {
+  border-radius: 100%;
+  width: 10em;
+  height: 10em;
+}
+
 
 .footer {
   width: 100%;
@@ -55,5 +113,26 @@
   #headerSubtitle {
     font-size: smaller;
     font-weight: bold;
+  }
+  .productHighlightGrid {
+    margin-top: 20vh;
+    display: grid;
+    grid-template-columns: auto;
+  }
+  .imageContainer img {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+  }
+  #phdTitle {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  #phdDescription {
+    font-size: 0.9rem;
+  }
+  .serviceGrid {
+    display: grid;
+    grid-template-columns: auto auto;
   }
 }

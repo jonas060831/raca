@@ -27,6 +27,12 @@
 
 .nav ul li:hover  { color: grey; }
 
+.nav .active {
+    text-decoration: underline;
+    text-decoration-thickness: 20%;
+}
+
+
 .container {
     /* this should be same as container */
     width: 80%;

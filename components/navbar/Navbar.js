@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 import Link from 'next/link'
 import styles from '../../styles/Navbar.module.css'
 import { Sun, Moon, Menu, X } from 'react-feather'
@@ -29,6 +30,7 @@ const Navbar = () => {
     const openNav = () => setisShown(true)
     const closeNav = () => setisShown(false)
     
+    const router = useRouter()
 
 
     return (
@@ -40,13 +42,29 @@ const Navbar = () => {
 
             <ul className={styles.mainMenu} style={ isShown ? { display: 'block'} : {} }>
 
-                <li> <Link href="/" >Home</Link> </li>
+                <li className={router.pathname === "/" ? styles.active : ""}>
+                    <Link href="/">
+                        Home
+                    </Link>
+                </li>
 
-                <li> <Link href="/services" >Services</Link> </li>
+                <li className={router.pathname === "/services" ? styles.active : ""}>
+                    <Link href="/services" >
+                        Services
+                    </Link>
+                </li>
 
-                <li>Gallery</li>
+                <li className={router.pathname === "/gallery" ? styles.active : ""}>
+                    <Link href="/gallery" >
+                        Gallery
+                    </Link>
+                </li>
 
-                <li>Contact Us</li>
+                <li className={router.pathname === "/contactus" ? styles.active : ""}>
+                    <Link href="/contactus" >
+                        Contact Us
+                    </Link>
+                </li>
 
                 {/* force sun to be on the right side when on mobile screen*/}
                 <li
