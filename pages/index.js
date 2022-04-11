@@ -1,16 +1,16 @@
-import Head from 'next/head'
 import { useRouter } from 'next/router'
 import styles from '../styles/Home.module.css'
 
 //components
+import HeadSEO from '../components/seo/HeadSEO'
 import Navbar from '../components/navbar/Navbar'
-
+import Footer from '../components/footer/Footer'
 
 const phd = [
   {
     id: 1,
     title: "Its not just a regular fan",
-    description: "Its not just a fan but it’s an Evaporative Air coolerguaranteed to blast cooler air and give comfort to your guests on special events.",
+    description: "Its not just a fan but it’s an Evaporative Air cooler guaranteed to blast cooler air and give comfort to your guests on special events.",
     image: "/product-highlight/fan+guy.png"
   },
   {
@@ -63,12 +63,12 @@ const Home = () => {
 
   return (
     <div>
-      <Head>
-        <title>IWATA Air Cooler for Rent</title>
-        <meta name="description" content="IWATA evaporative air cooler for rent. Beat the heat! Guaranteed to blast cooler air and give comfort to your guests on special events. Great for indoor and outdoor activities." />
-        <meta property="og:title" content="IWATA Air Cooler for Rent" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+
+      <HeadSEO
+        TabTitle="Home"
+        title="IWATA Air Cooler for Rent"
+        description="IWATA evaporative air cooler for rent. Beat the heat! Guaranteed to blast cooler air and give comfort to your guests on special events. Great for indoor and outdoor activities."
+      />
 
       <Navbar/>
 
@@ -166,9 +166,8 @@ const Home = () => {
                 
         </main>
 
-        <footer className={styles.footer}>
-        
-        </footer>
+        <Footer/>
+
       </div>
       
     </div>
