@@ -29,7 +29,6 @@
 
 .productTraits {
   margin-top: 20vh;
-  line-height: 2em;
 }
 
 .productTraits h1, .productTraits h3 {
@@ -40,7 +39,7 @@
   display: grid;
   grid-template-columns: auto auto;
   margin: 1rem 1rem 1rem 1rem;
-  gap: 2rem;
+  gap: 2em;
 }
 
 
@@ -58,10 +57,12 @@
 }
 
 #phdTitle {
-  font-size: 2rem;
+  font-size: 1.54rem;
   font-weight: 600;
 }
-
+#phdDescription {
+  line-height: 2rem;
+}
 
 .serviceOffered {
   
@@ -162,7 +163,7 @@
     bottom: 0;
   }
   #phdTitle {
-    font-size: 1rem;
+    font-size: 1.6rem;
     font-weight: 600;
   }
   #phdDescription {
@@ -170,8 +171,13 @@
   }
   .serviceGrid {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto;
   }
+
+  .serviceOffered h1 {
+    text-align: center;
+  }
+
   .serviceOfferedCard img {
     width: 7em;
     height: 7em;
