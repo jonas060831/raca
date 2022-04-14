@@ -1,23 +1,42 @@
 import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import styles from '../styles/Home.module.css'
 
 //components
 import HeadSEO from '../components/seo/HeadSEO'
-import Navbar from '../components/navbar/Navbar'
-import Footer from '../components/footer/Footer'
 import ProductHighlights from '../components/landingpage/productHighlights'
 
 //datas
 import { getAllProductHighlights } from '../datas/productHighlights.js'
-import { getAllServiceThumbNail } from '../datas/servicesThumbNail'
+import { getServices } from '../datas/services'
+
+//helpers
+import { validUrl } from '../helpers/validUrl'
+
 
 
 const Home = () => {
 
-  const router = useRouter()
+  
 
+
+  const insertSeeAll = (arr, remaining, index) => {
+    var s = arr
+    var seeall = { id: 8, name: "See All", thumbnail: "/media/images/services/images/thumbnail.png" }
+    s.splice(index, remaining, seeall)
+    return s
+  }
+
+  const router = useRouter()
   const phd = getAllProductHighlights()
-  const serviceImageCard = getAllServiceThumbNail()
+
+  var s = getServices()
+  var na = []
+  //dont use state just regular array function
+  na.push(...s)
+  //this will return the updated array value without altering the original services array
+  var tv = insertSeeAll(na, 3, 7)
+
 
   return (
     <div>
@@ -28,22 +47,20 @@ const Home = () => {
         description="IWATA evaporative air cooler for rent. Beat the heat! Guaranteed to blast cooler air and give comfort to your guests on special events. Great for indoor and outdoor activities."
       />
 
-      <Navbar/>
-
       <div className={styles.container} >
 
-        <header className={styles.header}>
-          <img
-            src="/companylogo.png"
-            id={styles.companyLogo}
-          />
+        <main>
 
-          <p id={styles.headerTitle} > Start your Day with rentacoolair </p>
-          <p id={styles.headerSubtitle}>Trusted by Many love by everyone Nationwide.</p>
+          <section className={styles.intro}>
+            <img
+                src="/companylogo.png"
+                id={styles.companyLogo}
+            />
 
-        </header>
+            <p id={styles.headerTitle} > Start your Day with rentacoolair </p>
+            <p id={styles.headerSubtitle}>Trusted by Many love by everyone Nationwide.</p>
+          </section>
 
-        <main className={styles.main}>
             
           <ProductHighlights 
             phd={phd}
@@ -56,13 +73,18 @@ const Home = () => {
                 <br /><br />
 
                 <div className={styles.serviceGrid}>
-                  {serviceImageCard.map( item => {
-                    return (
-                      <div className={styles.serviceOfferedCard} key={item.id} onClick={ () => router.push('/services') }>
+                  {tv.map( item => {
 
-                            <img src={item.image} alt={item.image} />
+                    const urlString = validUrl(item.name)
+
+                    const url = urlString === "seeall" ?  "/services" : `/${urlString}`
+
+                    return (
+                      <div className={styles.serviceOfferedCard} key={item.id} onClick={ () => router.push(url) }>
+
+                            <img src={item.thumbnail} alt={item.thumbnail} />
                             <br />
-                            <h4>{item.label}</h4>
+                            <h4>{item.name}</h4>
                       </div>  
                     )
                   })}
@@ -77,7 +99,6 @@ const Home = () => {
 
           </section>
           
-
           <section>
 
                   <div className={styles.notice1}>
@@ -87,21 +108,15 @@ const Home = () => {
                   </div>
 
 
-                  <div className={styles.notice2}>
+                  <div className={styles.notice1}>
                       <p>
                       If you have questions, concerns or for quotations please do not hesitate to email us at rentacoolair@gmail.com or call us at the numbers posted below and let us know how we can help.
                       </p>
                   </div>
 
           </section>
-
-                
         </main>
-
-        <Footer/>
-
       </div>
-      
     </div>
   )
 }

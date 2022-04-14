@@ -29,9 +29,8 @@
 
 .nav .active {
     text-decoration: underline;
-    text-decoration-thickness: 20%;
+    text-decoration-thickness: 15%;
 }
-
 
 .container {
     /* this should be same as container */

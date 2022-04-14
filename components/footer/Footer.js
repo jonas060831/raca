@@ -1,14 +1,15 @@
 import React from 'react'
-
+import styles from '../../styles/components/Footer.module.css';
 
 const Footer = () => {
+
   return (
-    <footer className="footer">
+    <footer className={styles.footer}>
 
             <div>
                 <h3>Mike</h3>
                 <p>NCR (Metro Manila) & South Area</p>
-                <p>0991-327-7474</p>
+                <p>0991-327-7474 & 0917-856-6681</p>
                 <p>iwatarentacoolair@gmail.com</p>
             </div>
 

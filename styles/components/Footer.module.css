@@ -1,0 +1,29 @@
+.footer {
+    width: 80%;
+    max-width: 1300px;
+    margin: 0px auto;
+    border-top: 1px solid #797777c0;
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
+    padding: 2.2rem;
+  }
+
+  .footer p {
+    font-size: 0.9rem;
+  }
+
+
+
+  /* MOBILES */
+
+  @media only screen and (max-width: 600px) {
+    .footer {
+      display: block;
+      width: 100%;
+      height: 50vh;
+    }
+  }
