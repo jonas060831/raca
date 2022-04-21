@@ -1,0 +1,24 @@
+.inputcontainer {
+    width: 100%;
+}
+.inputcontainer span {
+    position: absolute;
+    margin-top: 1.8rem;
+    margin-left: 1.5rem;
+}
+
+.inputcontainer input[type=text] {
+    width: 100%;
+    background: none;
+    height: 5rem;
+    border: 3px solid var(--secondary-color);
+    border-radius: 10px;
+    padding-left: 3.3rem;
+    color: var(--secondary-color);
+    font-size: 1.3em;
+    caret-color: white;
+}
+
+.inputcontainer input[type=text]:focus {
+    outline: red;
+}

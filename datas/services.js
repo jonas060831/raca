@@ -54,3 +54,10 @@ const services = [
 export function getServices() {
     return services
 }
+
+export function getService(serviceId) {
+
+    const service = services.find( service => serviceId == service.id)
+
+    return service
+}

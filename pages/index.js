@@ -77,7 +77,7 @@ const Home = () => {
 
                     const urlString = validUrl(item.name)
 
-                    const url = urlString === "seeall" ?  "/services" : `/${urlString}`
+                    const url = urlString === "seeall" ?  "/services" : `/services/${item.id}`
 
                     return (
                       <div className={styles.serviceOfferedCard} key={item.id} onClick={ () => router.push(url) }>

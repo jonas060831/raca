@@ -11,20 +11,47 @@ const Navbar = () => {
     const [screenWidth, setscreenWidth] = useState(0)
     const [isShown, setisShown] = useState(false)
     const [themeIcon, setThemeIcon] = useState(<Moon/>)
-
+ 
     useEffect(() => {
         setscreenWidth(screen.width)
+
+        isOnDarkMode()
+
     }, [])
 
+    const isOnDarkMode = () => {
+
+        const mode = window.localStorage.getItem('mode')
+
+        if (mode == null) {
+            return
+        }
+        //check the storage if dark mode is on
+
+        //if on dark mode set the page to dark mode
+        if (mode === 'dark') {
+            document.body.classList.add("dark-theme");
+            setThemeIcon(<Sun/>)
+        } else {
+            document.body.classList.remove("dark-theme");
+            setThemeIcon(<Moon/>)
+        }
+
+        // else do nothing
+    }
 
     const changeTheme = () => {
         
         document.body.classList.toggle("dark-theme");
         const inDarkTheme = document.body.classList.contains("dark-theme");
+
         if (inDarkTheme) {
             setThemeIcon(<Sun/>)
+
+            window.localStorage.setItem('mode', 'dark');
         } else {
             setThemeIcon(<Moon />)
+            window.localStorage.setItem('mode','light');
         }
     }
     const openNav = () => setisShown(true)

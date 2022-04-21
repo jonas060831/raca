@@ -28,3 +28,9 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.center {
+  height: 100vh;
+  text-align: center;
+  line-height: 100vh;
+}

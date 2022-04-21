@@ -11,6 +11,10 @@
     padding: 1rem;
 }
 
+.details p {
+    font-weight: 600;
+}
+
 .imageContainer img {
     width: 100%;
     height: 100%;
@@ -20,7 +24,7 @@
     font-weight: 600;
     background-color: var(--secondary-color);
     color: var(--primary-color);
-    width: 90%;
+    width: 80%;
     padding: 0.8rem;
     border-radius: 10px;
     margin: 0px auto;

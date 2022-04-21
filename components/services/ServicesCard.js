@@ -1,16 +1,13 @@
 import Link from 'next/link'
 import React from 'react'
+import { useRouter } from 'next/router'
 
 //styles
 import styles from '../../styles/components/ServicesCard.module.css'
 
-//helpers
-import { validUrl } from '../../helpers/validUrl'
-
-
 const ServicesCard = ({ item }) => {
 
-  const urlString = validUrl(item.name)
+  const router = useRouter()
 
   return (
       <div className={styles.card}>
@@ -21,14 +18,13 @@ const ServicesCard = ({ item }) => {
 
           <div className={styles.details}>
 
-                <h3>{item.name}</h3>
-                <hr style={{ width: '50% '}}/>
-                <Link href={`/services/${urlString}`}>
-                    <div className={styles.linkButton}>
-                        REQUEST A QUOTE
-                    </div>
-                </Link>
+                <p>{item.name}</p>
 
+                <hr style={{ width: '50% '}}/>
+
+                    <div className={styles.linkButton} onClick={ () => router.push(`/services/${item.id}`)} >
+                        REQUEST <br /> A QUOTE
+                    </div>
           </div>
       </div>
   )
