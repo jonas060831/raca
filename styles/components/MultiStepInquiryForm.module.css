@@ -14,3 +14,17 @@
     display: block;
     border: 3px solid var(--secondary-color);
 }
+
+
+.step3Content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 5rem;
+}
+
+.step3Content {
+    font-size: 5.6rem;
+    line-height: 1;
+}

@@ -9,16 +9,10 @@ import Button from '../../ui/Button'
 import styles from '../../../styles/components/StepForm.module.css'
 const StepForm = (props) => {
 
-  const { slug, service, title, action, nextStep, prevStep, selectedService } = props
+  const { service, title, action, nextStep, prevStep, selectedService } = props
 
   const router = useRouter()
-
-  const updateSlug = () => {
-      if (slug.length === 1) {
-          
-      }
-  }
- 
+  
   const renderAction = () => {
       switch (action) {
           case 'initial':

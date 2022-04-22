@@ -51,11 +51,11 @@ const services = [
     }
 ]
 
-export function getServices() {
+export const getServices = () => {
     return services
 }
 
-export function getService(serviceId) {
+export const getService = (serviceId) => {
 
     const service = services.find( service => serviceId == service.id)
 

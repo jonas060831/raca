@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 //styles
 import styles from '../../styles/components/ui/Select.module.css'
 
-const Select = ({ value, name, id, onChange, options, icon }) => {
+const Select = ({ value, name, id, onChange, options, icon, onLocationValueChange }) => {
 
     const [screenWidth, setscreenWidth] = useState(0)
  
@@ -25,13 +25,14 @@ const Select = ({ value, name, id, onChange, options, icon }) => {
         name={name}
         id={id}
         onChange={ onChange }
+        onBlur={ () => onLocationValueChange() }
         >
             {
                 options.map( (option) => {
                     return (
                         <option
                             value={option.name}
-                            key={option.name}
+                            key={option.id}
                         >
                             {option.name}
                         </option>

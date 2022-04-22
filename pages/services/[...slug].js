@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 
 //data
 import { getService } from '../../datas/services'
+import { getAreas, getAreaByName } from '../../datas/areas'
 
 //components
 import HeadSEO from '../../components/seo/HeadSEO'
@@ -11,75 +12,147 @@ import MultiStepInquiryForm from '../../components/services/MultiStepInquiryForm
 //styles
 import styles from '../../styles/InquiryPage.module.css'
 
-const  InquiryPage = () => {
+const InquiryPage = () => {
 
   const router = useRouter()
   const slug = router.query.slug
   const [step, setStep] = useState(1)
   const [message, setMessage] = useState({ service: {}, location: {} })
-  const [inputLocation, setLocationValue] = useState({ street1: "", street2: "", CityOrMunicipality: "", district: "" })
+  const [selectedService, setSelectedService] = useState({ id: 0, name: "", thumbnail: ""})
+  const [location, setLocationValue] = useState({ street1: "", street2: "", CityOrMunicipality: "", district: "" })
+  const [unitCount, setUnitCount] = useState(1)
   
-  const options = [
-      { name: "Select City" },
-      { name:  "Manila"},
-      { name:  "Mandaluyong"},
-      { name: "Marikina"},
-      { name: "Quezon City"},
-      { name: "San Juan"},
-      { name: "Caloocan"},
-      { name: "Malabon"},
-      { name: "Navotas"},
-      { name: "Valenzuela"},
-      { name: "Las Piñas"},
-      { name: "Makati"},
-      { name: "Muntinlupa"},
-      { name: "Parañaque"},
-      { name: "Pasay"},
-      { name: "Pateros"},
-      { name: "Taguig"}
-  ]
-
   if (!slug) {
-      return <p className="center">Loading...</p>
+    return <p className="center">Loading...</p>
   }
 
   const serviceId = slug[0]
   const service = getService(serviceId)
   
+  const areas = getAreas()
+
   const next = () => {
       setStep(step += 1)
+
+      if (slug.length === 1) {
+          //convert object to string
+          const jsonString = JSON.stringify(location);
+
+          //base64
+          const buff = Buffer.from(jsonString, 'utf-8')
+          const base64 = buff.toString('base64')
+
+          router.push(`/services/${serviceId}/${base64}`)
+      } else if (slug.length === 2) {
+
+          //convert object to string
+          const jsonString = JSON.stringify(location);
+
+          //base64
+          const buff = Buffer.from(jsonString, 'utf-8')
+          const base64 = buff.toString('base64')
+          router.push(`/services/${serviceId}/${base64}/${unitCount}`)
+      } else if (slug.length === 3) {
+
+
+        //convert object to string
+        const jsonString = JSON.stringify(location);
+
+        //base64
+        const buff = Buffer.from(jsonString, 'utf-8')
+        const base64 = buff.toString('base64')
+        router.push(`/services/${serviceId}/${base64}/${unitCount}`)
+
+      }
   }
+
 
   const previous = () => {
     setStep(step -= 1)
 }
 
-const selectedService = (service) => {
+const handleSelectedService = (service) => {
     const n = {
         service : { id: service.id, name: service.name, thumbnail: service.thumbnail }
     }
-    setMessage(Object.assign(message, n))
+
+    //add values to selectedService
+    setSelectedService(Object.assign(selectedService, n.service))
 }
 
 const handleLocationChange = (e) => {
     const { name, value } = e.target
 
+    //add value to location
+    const area = getAreaByName(value)
+    const district = ""
+    
+    if (area !== undefined) {
+        district = area.district
+    }
+
     setLocationValue((prev) => ({
       ...prev,
       [name]: value,
+      "district" : district
     }));
-  };
+  }
 
-  const callValues = () => {
+const onLocationValueChange = () => {
 
-    const n = {
-        location: { street1: inputLocation.street1, street2: inputLocation.street2, CityOrMunicipality: inputLocation.CityOrMunicipality, district: inputLocation.district }
+    const jsonString = JSON.stringify(location);
+    //base64
+    const buff = Buffer.from(jsonString, 'utf-8')
+    const base64 = buff.toString('base64')
+
+    
+
+    if (slug.length === 2) {
+        router.push(`/services/${serviceId}/${base64}`)
+    } else if (slug.length === 3) {
+        router.push(`/services/${serviceId}/${base64}/${unitCount}`)
     }
 
-    setMessage(Object.assign(message, n))
-
-    console.log(message)
   }
+
+const increaseUnitCount = () => {
+    
+    if (unitCount >= 1) {
+        setUnitCount(unitCount += 1)
+
+
+        const jsonString = JSON.stringify(location);
+        //base64
+        const buff = Buffer.from(jsonString, 'utf-8')
+        const base64 = buff.toString('base64')
+
+        router.push(`/services/${serviceId}/${base64}/${unitCount}`)
+    }
+    
+}
+
+const decreaseUnitCount = () => {
+
+    if (unitCount > 1) {
+        setUnitCount(unitCount -= 1)
+
+
+        const jsonString = JSON.stringify(location);
+        //base64
+        const buff = Buffer.from(jsonString, 'utf-8')
+        const base64 = buff.toString('base64')
+
+        router.push(`/services/${serviceId}/${base64}/${unitCount}`)
+
+    }
+}
+
+const callValues = () => {
+
+console.log(selectedService)
+console.log(location)
+console.log(unitCount)
+}
 
   return (
     <div>
@@ -98,16 +171,22 @@ const handleLocationChange = (e) => {
                     <MultiStepInquiryForm
                         step={step}
                         slug={slug}
-
+                        setStep={ setStep }
                         service={service}
                         nextStep={ () => next() }
                         prevStep={ () => previous() }
-                        selectedService={ selectedService }
-                        inputLocation= { inputLocation }
+                        selectedService={ handleSelectedService }
+                        location= { location }
                         message={ message }
                         setMessage={ setMessage }
                         handleLocationChange={ handleLocationChange }
-                        options={ options }
+                        setLocationValue= { setLocationValue }
+                        onLocationValueChange = { onLocationValueChange }
+                        areas={ areas }
+                        unitCount={ unitCount }
+                        increaseUnitCount= { increaseUnitCount }
+                        decreaseUnitCount= { decreaseUnitCount }
+                        setUnitCount={ setUnitCount}
                     />
                 </section>
             </div>
