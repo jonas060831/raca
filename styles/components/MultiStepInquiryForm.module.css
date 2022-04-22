@@ -28,3 +28,13 @@
     font-size: 5.6rem;
     line-height: 1;
 }
+
+
+
+.step4Content {
+    display: block;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}

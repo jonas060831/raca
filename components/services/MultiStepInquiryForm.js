@@ -1,6 +1,9 @@
 import React, { useCallback, useEffect } from 'react'
-
+import { useRouter } from 'next/router'
 import { MapPin, Home, Flag, Plus, Minus } from 'react-feather'
+import { DateRange, DayPicker } from 'react-day-picker';
+import 'react-day-picker/dist/style.css';
+
 
 //components
 import StepForm from '../services/inquiry-form/StepForm'
@@ -12,9 +15,10 @@ import styles from '../../styles/components/MultiStepInquiryForm.module.css'
 import Select from '../ui/Select'
 
 const MultiStepInquiryForm = (props) => {
-  const {  setStep, slug, step, service, nextStep, prevStep, selectedService, setLocationValue, handleLocationChange, location, areas, onLocationValueChange, unitCount, setUnitCount, increaseUnitCount, decreaseUnitCount } = props
+  const {  setStep, slug, step, service, nextStep, prevStep, selectedService, setLocationValue, handleLocationChange, location, areas, onLocationValueChange, unitCount, setUnitCount, increaseUnitCount, decreaseUnitCount, date, setDate, isMultiple, setIsMultiple } = props
   const { street1, street2, CityOrMunicipality } = props.location
-  
+  const router = useRouter()
+
   //7 cases
   //button cases initial,next, submit
 
@@ -64,15 +68,76 @@ const MultiStepInquiryForm = (props) => {
             const unitCount = parseInt(slug[2])
 
             setUnitCount(unitCount)
+
+        } else if (slug.length === 4) {
+            //set the value of date
+
+            //resest the service
+            selectedService(service)  
+
+            //set the address from url /service/serviceId/locationBase64
+            const locationBase64String = slug[1]
+            
+            const buff = Buffer.from(locationBase64String, 'base64')
+
+            const jsonStr = buff.toString('utf-8')
+            
+            const jsonObject = JSON.parse(jsonStr)
+
+            setLocationValue(jsonObject)
+
+            const unitCount = parseInt(slug[2])
+
+            setUnitCount(unitCount)
+
+
+            const date = slug[3]
+            var d = new Date(0)
+            var epochDate = d.setUTCSeconds(date)
+            setDate(new Date(epochDate))
+
         }
   }, [])
+
+  
+
+
+  const renderCalendar = () => {
+
+    
+
+    if(isMultiple) {
+        return (
+            <div style={{ width: "300px", margin: "0px auto" }}>
+                <br />
+                <br />
+
+                <DayPicker
+                    mode="range"
+                    
+                />
+            </div>
+        )
+    }
+
+    return (
+            <div style={{ width: "300px", margin: "0px auto" }}>
+                <br />
+                <br />
+
+                <DayPicker
+                />
+            </div>
+    )
+
+  }
 
   switch (step) {
       
       case 1:
           return (
                 <StepForm
-                    title={`Select Service`}
+                    title={`Select Service ${service.name}`}
                     action="initial"
                     nextStep={ nextStep }
                     prevStep={ prevStep }
@@ -163,9 +228,47 @@ const MultiStepInquiryForm = (props) => {
                 </section>
 
                 
-
             </StepForm>
           )
+        case 4: 
+            return (
+                <StepForm
+                title="Service Date"
+                action="next"
+                nextStep={ nextStep }
+                prevStep={ prevStep }
+                >
+                    <section className={styles.step4Content}>
+
+                        <br /><br /><br />
+
+                        <input
+                            type="radio"
+                            id="singleday"
+                            name="daterenderer"
+                            value="single"
+                            checked={!isMultiple}
+                            onChange={ () => setIsMultiple(!isMultiple)}
+                        />
+                        
+                        <label htmlFor="singleday">Single Day</label>
+                        
+                        <input
+                            type="radio"
+                            id="multipleday"
+                            name="daterenderer"
+                            value="multiple"
+                            checked={isMultiple}
+                            onChange={ () => setIsMultiple(!isMultiple)}
+                        />
+                            <label htmlFor="multipleday">Multiple Days</label>
+                        
+                        { renderCalendar() }
+
+                    </section>
+
+                </StepForm>
+            )
       default:
             return (
                 <StepForm

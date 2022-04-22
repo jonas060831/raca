@@ -21,6 +21,8 @@ const InquiryPage = () => {
   const [selectedService, setSelectedService] = useState({ id: 0, name: "", thumbnail: ""})
   const [location, setLocationValue] = useState({ street1: "", street2: "", CityOrMunicipality: "", district: "" })
   const [unitCount, setUnitCount] = useState(1)
+  const [date, setDate] = useState(new Date)
+  const [isMultiple, setIsMultiple] = useState(true)
   
   if (!slug) {
     return <p className="center">Loading...</p>
@@ -61,14 +63,32 @@ const InquiryPage = () => {
         //base64
         const buff = Buffer.from(jsonString, 'utf-8')
         const base64 = buff.toString('base64')
-        router.push(`/services/${serviceId}/${base64}/${unitCount}`)
 
+
+        const epochDate = Date.parse(date)
+
+        router.push(`/services/${serviceId}/${base64}/${unitCount}/${epochDate}`)
+      } else if (slug.length === 4) {
+          
+        
+        //convert object to string
+        const jsonString = JSON.stringify(location);
+
+        //base64
+        const buff = Buffer.from(jsonString, 'utf-8')
+        const base64 = buff.toString('base64')
+
+        const epochDate = Date.parse(date)
+
+        router.push(`/services/${serviceId}/${base64}/${unitCount}/${epochDate}`)
+          
       }
   }
 
 
-  const previous = () => {
-    setStep(step -= 1)
+const previous = () => {
+
+    setStep(step -= 1)    
 }
 
 const handleSelectedService = (service) => {
@@ -105,12 +125,14 @@ const onLocationValueChange = () => {
     const buff = Buffer.from(jsonString, 'utf-8')
     const base64 = buff.toString('base64')
 
-    
-
     if (slug.length === 2) {
         router.push(`/services/${serviceId}/${base64}`)
     } else if (slug.length === 3) {
         router.push(`/services/${serviceId}/${base64}/${unitCount}`)
+    }else if (slug.length === 4) {
+
+        const epochDate = Date.parse(date)
+        router.push(`/services/${serviceId}/${base64}/${unitCount}/${epochDate}`)
     }
 
   }
@@ -125,8 +147,16 @@ const increaseUnitCount = () => {
         //base64
         const buff = Buffer.from(jsonString, 'utf-8')
         const base64 = buff.toString('base64')
+        
 
-        router.push(`/services/${serviceId}/${base64}/${unitCount}`)
+        if (slug.length <= 3) {
+          router.push(`/services/${serviceId}/${base64}/${unitCount}`)
+        }
+        else if (slug.length === 4) {
+          const epochDate = Date.parse(date)
+          router.push(`/services/${serviceId}/${base64}/${unitCount}/${epochDate}`)
+        }
+        
     }
     
 }
@@ -142,7 +172,13 @@ const decreaseUnitCount = () => {
         const buff = Buffer.from(jsonString, 'utf-8')
         const base64 = buff.toString('base64')
 
-        router.push(`/services/${serviceId}/${base64}/${unitCount}`)
+        if (slug.length <= 3) {
+          router.push(`/services/${serviceId}/${base64}/${unitCount}`)
+        }
+        else if (slug.length === 4) {
+          const epochDate = Date.parse(date)
+          router.push(`/services/${serviceId}/${base64}/${unitCount}/${epochDate}`)
+        }
 
     }
 }
@@ -152,6 +188,7 @@ const callValues = () => {
 console.log(selectedService)
 console.log(location)
 console.log(unitCount)
+console.log(date)
 }
 
   return (
@@ -187,6 +224,10 @@ console.log(unitCount)
                         increaseUnitCount= { increaseUnitCount }
                         decreaseUnitCount= { decreaseUnitCount }
                         setUnitCount={ setUnitCount}
+                        date={ date }
+                        setDate={ setDate }
+                        isMultiple={ isMultiple }
+                        setIsMultiple={ setIsMultiple }
                     />
                 </section>
             </div>
