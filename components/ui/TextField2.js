@@ -3,7 +3,7 @@ import React from 'react'
 //styles
 import styles from '../../styles/components/ui/Textfield.module.css'
 
-const TextField = ({ value, name, placeholder, onChange, icon, autoFocus, onLocationValueChange }) => {
+const TextField2 = ({ value, name, placeholder, onChange, icon, onContactValueChange }) => {
   
   return (
       <div className={styles.inputcontainer}>
@@ -15,10 +15,10 @@ const TextField = ({ value, name, placeholder, onChange, icon, autoFocus, onLoca
             // ref={autoFocus}
             placeholder={placeholder}
             onChange={ onChange }
-            onBlur={ () => { onLocationValueChange() } }
+            onBlur={ () => { onContactValueChange() } }
           />
       </div>
   )
 }
 
-export default TextField
+export default TextField2

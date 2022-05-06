@@ -1,6 +1,6 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import { X, Check, ArrowLeft, ArrowRight } from 'react-feather'
+import { X, Check, ArrowLeft, ArrowRight, Send } from 'react-feather'
 
 //components
 import Button from '../../ui/Button'
@@ -9,7 +9,7 @@ import Button from '../../ui/Button'
 import styles from '../../../styles/components/StepForm.module.css'
 const StepForm = (props) => {
 
-  const { service, title, action, nextStep, prevStep, selectedService } = props
+  const { title, action, nextStep, prevStep } = props
 
   const router = useRouter()
   
@@ -32,7 +32,6 @@ const StepForm = (props) => {
                         icon={<Check/>}
                         iconRight={false}
                         handleClick={ () => {
-                            selectedService(service),
                             nextStep()
                         }}
                       />
@@ -60,10 +59,24 @@ const StepForm = (props) => {
           case 'submit':
               return (
                     <div>
-                        <button onClick={ prevStep } >prev</button>
-                        <button onClick={ () => alert(123) }>submit</button>
+                        <Button
+                        title="Previous"
+                        type="main"
+                        icon={<ArrowLeft />}
+                        handleClick={ prevStep }
+                        />
+                        &nbsp;&nbsp;
+                        {/* <Button
+                        title="Submit"
+                        type="main"
+                        icon={<Send />}
+                        iconRight={true}
+                        handleClick={ handleSubmitMessage }
+                        /> */}
                     </div> 
               )
+         default:
+              return <></>
       }
   }
 
@@ -78,10 +91,8 @@ const StepForm = (props) => {
             {props.children}
 
         </section>
-
         <hr />
-
-        <section className={styles.action} > 
+        <section className={styles.action} >
             { renderAction() }
         </section>
 

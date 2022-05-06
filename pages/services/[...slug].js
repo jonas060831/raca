@@ -1,5 +1,7 @@
 import React, { useState, useEffect }  from 'react'
 import { useRouter } from 'next/router'
+import { addDays, format } from 'date-fns'
+import axios from 'axios'
 
 //data
 import { getService } from '../../datas/services'
@@ -12,18 +14,54 @@ import MultiStepInquiryForm from '../../components/services/MultiStepInquiryForm
 //styles
 import styles from '../../styles/InquiryPage.module.css'
 
+//helpers
+import { objectToBase64String } from '../../helpers/objectToBase64String'
+import { base64StringToJsonObject } from '../../helpers/base64StringToJsonObject'
+
+
 const InquiryPage = () => {
+
+
+  //multiple days
+  const today = new Date();
+  const yesterday = new Date()
+  yesterday.setDate(today.getDate() - 1 )
+
+  const tommorow = new Date()
+  tommorow.setDate(today.getDate() + 1 )
+
+  
+  const disabledDays = [
+      { from: new Date(1991, 8, 5), to: yesterday }
+  ]
 
   const router = useRouter()
   const slug = router.query.slug
   const [step, setStep] = useState(1)
-  const [message, setMessage] = useState({ service: {}, location: {} })
+  const [message, setMessage] = useState("")
   const [selectedService, setSelectedService] = useState({ id: 0, name: "", thumbnail: ""})
   const [location, setLocationValue] = useState({ street1: "", street2: "", CityOrMunicipality: "", district: "" })
   const [unitCount, setUnitCount] = useState(1)
-  const [date, setDate] = useState(new Date)
-  const [isMultiple, setIsMultiple] = useState(true)
+  const [contact, setContact] = useState({ name: '', phone: '', email: '' })
+  const [sr, setSr] = useState('initial')
+  const [sm, setSm] = useState('')
   
+  const [date, setDate] = useState({ isMultiple: true, single: { date: new Date(), start: '', end: '' }, multiple: { from: today, to: addDays(today, 2), start: '', end: '' } })
+  const [range, setRange] = useState({ from: today, to: addDays(today, 2)})
+
+  let footer = <p>Please pick the first day.</p>;
+  if (range?.from) {
+    if (!range.to) {
+      footer = <p>{format(range.from, 'PPP')}</p>;
+    } else if (range.to) {
+      footer = (
+        <p>
+          {format(range.from, 'PPP')}–{format(range.to, 'PPP')}
+        </p>
+      );
+    }
+  }
+
   if (!slug) {
     return <p className="center">Loading...</p>
   }
@@ -38,158 +76,283 @@ const InquiryPage = () => {
 
       if (slug.length === 1) {
           //convert object to string
-          const jsonString = JSON.stringify(location);
+          const base64 = objectToBase64String(location)
 
-          //base64
-          const buff = Buffer.from(jsonString, 'utf-8')
-          const base64 = buff.toString('base64')
-
-          router.push(`/services/${serviceId}/${base64}`)
+          router.push(`/services/${serviceId}/${base64}`, undefined, { scroll: false })
       } else if (slug.length === 2) {
 
           //convert object to string
-          const jsonString = JSON.stringify(location);
+          const base64 = objectToBase64String(location)
 
-          //base64
-          const buff = Buffer.from(jsonString, 'utf-8')
-          const base64 = buff.toString('base64')
-          router.push(`/services/${serviceId}/${base64}/${unitCount}`)
+          router.push(`/services/${serviceId}/${base64}/${unitCount}`, undefined, { scroll: false })
+          
       } else if (slug.length === 3) {
 
-
         //convert object to string
-        const jsonString = JSON.stringify(location);
+        const base64 = objectToBase64String(location)
 
-        //base64
-        const buff = Buffer.from(jsonString, 'utf-8')
-        const base64 = buff.toString('base64')
+        const base64Date = objectToBase64String(date)
 
-
-        const epochDate = Date.parse(date)
-
-        router.push(`/services/${serviceId}/${base64}/${unitCount}/${epochDate}`)
+        router.push(`/services/${serviceId}/${base64}/${unitCount}/${base64Date}`, undefined, { scroll: false })
       } else if (slug.length === 4) {
           
-        
         //convert object to string
-        const jsonString = JSON.stringify(location);
+        const base64 = objectToBase64String(location)
 
-        //base64
-        const buff = Buffer.from(jsonString, 'utf-8')
-        const base64 = buff.toString('base64')
+        setDate(state => ({
+          ...state,
+          multiple: { from: new Date(range.from), to: new Date(range.to), start: date.multiple.start, end: date.multiple.end }
+        }))
 
-        const epochDate = Date.parse(date)
+        const base64Date = objectToBase64String(date)
+        const base64Contact = objectToBase64String(contact)
+        router.push(`/services/${serviceId}/${base64}/${unitCount}/${base64Date}/${base64Contact}`, undefined, { scroll: false })
+      } else if (slug.length === 5) {
 
-        router.push(`/services/${serviceId}/${base64}/${unitCount}/${epochDate}`)
-          
+        //convert object to string
+        const base64 = objectToBase64String(location)
+
+        setDate(state => ({
+          ...state,
+          multiple: { from: new Date(range.from), to: new Date(range.to), start: date.multiple.start, end: date.multiple.end }
+        }))
+
+        const base64Date = objectToBase64String(date)
+        const base64Contact = objectToBase64String(contact)
+
+        generateMessage()
+
+        router.push(`/services/${serviceId}/${base64}/${unitCount}/${base64Date}/${base64Contact}/finish`, undefined, { scroll: false })
+
       }
   }
 
 
-const previous = () => {
+  const generateMessage = () => {
 
-    setStep(step -= 1)    
-}
+    const locationBase64String = slug[1]
+    const newLocation = base64StringToJsonObject(locationBase64String)
 
-const handleSelectedService = (service) => {
-    const n = {
-        service : { id: service.id, name: service.name, thumbnail: service.thumbnail }
-    }
+    const base64Date = slug[3]
+    const newDate = base64StringToJsonObject(base64Date)
 
-    //add values to selectedService
-    setSelectedService(Object.assign(selectedService, n.service))
-}
+    const base64Contact = slug[4]
+    const newContact = base64StringToJsonObject(base64Contact)
 
-const handleLocationChange = (e) => {
-    const { name, value } = e.target
-
-    //add value to location
-    const area = getAreaByName(value)
-    const district = ""
+    //message
+    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const beginDate = new Date(newDate.multiple.from).toLocaleDateString("en-US", options)
+    const endDate = new Date(newDate.multiple.to).toLocaleDateString("en-US", options)
     
-    if (area !== undefined) {
-        district = area.district
-    }
+    const renderDate = newDate.isMultiple === true ? `between the dates of ${beginDate} until ${endDate}. ` : 'single'
+    
+    //const creator = process.env.NEXT_PUBLIC_CREATOR_NAME
 
-    setLocationValue((prev) => ({
-      ...prev,
-      [name]: value,
-      "district" : district
-    }));
+    const updatedMessage = `Hi Rent A Cool Air Team,\n\n`+
+                           `\xa0 \xa0 My Name is ${newContact.name} Id like to enquire about your ${service.name} package. I need ${unitCount} air coolers. ` +
+                           `${renderDate}` +
+                           `at this location:\n${newLocation.street1} ${newLocation.street2} ${newLocation.CityOrMunicipality} ${newLocation.district} District\n` +
+                           `\nPlease Contact me at: \n`+
+                           `${newContact.phone}\n${newContact.email}\n\n`+
+                           `Thank You and Have a Great Day!`
+                           //`${creator}`
+
+    setMessage(updatedMessage)
   }
 
-const onLocationValueChange = () => {
 
-    const jsonString = JSON.stringify(location);
-    //base64
-    const buff = Buffer.from(jsonString, 'utf-8')
-    const base64 = buff.toString('base64')
+  const previous = () => {
 
-    if (slug.length === 2) {
-        router.push(`/services/${serviceId}/${base64}`)
-    } else if (slug.length === 3) {
-        router.push(`/services/${serviceId}/${base64}/${unitCount}`)
-    }else if (slug.length === 4) {
-
-        const epochDate = Date.parse(date)
-        router.push(`/services/${serviceId}/${base64}/${unitCount}/${epochDate}`)
-    }
-
+    setStep(step -= 1)
   }
 
-const increaseUnitCount = () => {
+  const setIsMultipleDay = (isItMultiple) => {
+
+    setDate( state => ({
+      ...state,
+       isMultiple: isItMultiple 
+    }))
+  }
+
+  const onRadioBlur = () => {
+    //convert object to string
+    const base64 = objectToBase64String(location)
+    const base64Date = objectToBase64String(date)
+
+    router.push(`/services/${serviceId}/${base64}/${unitCount}/${base64Date}`, undefined, { scroll: false })
+  }
+
+  const handleMultipleDateChange = (updatedDate) => {
     
-    if (unitCount >= 1) {
-        setUnitCount(unitCount += 1)
+    setRange(updatedDate)
 
-
-        const jsonString = JSON.stringify(location);
-        //base64
-        const buff = Buffer.from(jsonString, 'utf-8')
-        const base64 = buff.toString('base64')
-        
-
-        if (slug.length <= 3) {
-          router.push(`/services/${serviceId}/${base64}/${unitCount}`)
-        }
-        else if (slug.length === 4) {
-          const epochDate = Date.parse(date)
-          router.push(`/services/${serviceId}/${base64}/${unitCount}/${epochDate}`)
-        }
-        
+    if (updatedDate) {
+      setDate(state => ({
+        ...state,
+        multiple: { from: updatedDate.from, to: updatedDate.to, start: date.multiple.start, end: date.multiple.end }
+      }))
     }
-    
-}
+  }
 
-const decreaseUnitCount = () => {
+  const handleDayBlur = () => {
 
-    if (unitCount > 1) {
-        setUnitCount(unitCount -= 1)
+    const base64 = objectToBase64String(location)
+    const base64Date = objectToBase64String(date)
 
 
-        const jsonString = JSON.stringify(location);
-        //base64
-        const buff = Buffer.from(jsonString, 'utf-8')
-        const base64 = buff.toString('base64')
+    router.push(`/services/${serviceId}/${base64}/${unitCount}/${base64Date}`, undefined, { scroll: false })
+  }
+  const handleSelectedService = (service) => {
+      const n = {
+          service : { id: service.id, name: service.name, thumbnail: service.thumbnail }
+      }
 
-        if (slug.length <= 3) {
-          router.push(`/services/${serviceId}/${base64}/${unitCount}`)
-        }
-        else if (slug.length === 4) {
-          const epochDate = Date.parse(date)
-          router.push(`/services/${serviceId}/${base64}/${unitCount}/${epochDate}`)
-        }
+      //add values to selectedService
+      setSelectedService(Object.assign(selectedService, n.service))
+  }
+
+  const handleLocationChange = (e) => {
+      const { name, value } = e.target
+
+      //add value to location
+      const area = getAreaByName(value)
+      const district = ""
+      
+      if (area !== undefined) {
+          district = area.district
+      }
+
+      setLocationValue((prev) => ({
+        ...prev,
+        [name]: value,
+        "district" : district
+      }));
+    }
+
+  const onLocationValueChange = () => {
+
+
+      const base64 = objectToBase64String(location)
+
+      if (slug.length === 2) {
+          router.push(`/services/${serviceId}/${base64}`, undefined, { scroll: false })
+      } else if (slug.length === 3) {
+          router.push(`/services/${serviceId}/${base64}/${unitCount}`, undefined, { scroll: false })
+      } else if (slug.length === 4) {
+
+          const base64Date = objectToBase64String(date)
+          router.push(`/services/${serviceId}/${base64}/${unitCount}/${base64Date}`, undefined, { scroll: false })
+      }
 
     }
+
+    const handleContactChange = (e) => {
+      const { name, value } = e.target
+
+
+      setContact((prev) => ({
+        ...prev,
+        [name]: value
+      }));
+    }
+const onContactValueChange = () => {
+   
+  const base64 = objectToBase64String(location)
+
+      if (slug.length === 2) {
+          router.push(`/services/${serviceId}/${base64}`, undefined, { scroll: false })
+      } else if (slug.length === 3) {
+          router.push(`/services/${serviceId}/${base64}/${unitCount}`, undefined, { scroll: false })
+      } else if (slug.length === 4) {
+          const base64Date = objectToBase64String(date)
+          router.push(`/services/${serviceId}/${base64}/${unitCount}/${base64Date}`, undefined, { scroll: false })
+      } else if (slug.length === 5) {
+        const base64Date = objectToBase64String(date)
+        const base64Contact = objectToBase64String(contact)
+
+        router.push(`/services/${serviceId}/${base64}/${unitCount}/${base64Date}/${base64Contact}`, undefined, { scroll: false })
+      }
+
 }
 
-const callValues = () => {
 
-console.log(selectedService)
-console.log(location)
-console.log(unitCount)
-console.log(date)
-}
+  const increaseUnitCount = () => {
+      
+      if (unitCount >= 1) {
+          setUnitCount(unitCount += 1)
+
+          const base64 = objectToBase64String(location)
+          
+
+          if (slug.length <= 3) {
+            router.push(`/services/${serviceId}/${base64}/${unitCount}`, undefined, { scroll: false })
+          } else if (slug.length === 4) {
+            const base64Date = objectToBase64String(date)
+            router.push(`/services/${serviceId}/${base64}/${unitCount}/${base64Date}`, undefined, { scroll: false })
+          } else if (slug.length === 5) {
+            const base64Date = objectToBase64String(date)
+            const base64Contact = objectToBase64String(contact)
+            router.push(`/services/${serviceId}/${base64}/${unitCount}/${base64Date}/${base64Contact}`, undefined, { scroll: false })
+          } else if (slug.length === 6) {
+            const base64Date = objectToBase64String(date)
+            const base64Contact = objectToBase64String(contact)
+            router.push(`/services/${serviceId}/${base64}/${unitCount}/${base64Date}/${base64Contact}`, undefined, { scroll: false })
+          }
+          
+      }
+      
+  }
+
+  const decreaseUnitCount = () => {
+
+      if (unitCount > 1) {
+          setUnitCount(unitCount -= 1)
+
+
+          const base64 = objectToBase64String(location)
+
+          if (slug.length <= 3) {
+            router.push(`/services/${serviceId}/${base64}/${unitCount}`, undefined, { scroll: false })
+          } else if (slug.length === 4) {
+            const base64Date = objectToBase64String(date)
+            router.push(`/services/${serviceId}/${base64}/${unitCount}/${base64Date}`, undefined, { scroll: false })
+          } else if (slug.length === 5) {
+            const base64Date = objectToBase64String(date)
+            const base64Contact = objectToBase64String(contact)
+            router.push(`/services/${serviceId}/${base64}/${unitCount}/${base64Date}/${base64Contact}`, undefined, { scroll: false })
+          } else if (slug.length === 6) {
+            const base64Date = objectToBase64String(date)
+            const base64Contact = objectToBase64String(contact)
+            router.push(`/services/${serviceId}/${base64}/${unitCount}/${base64Date}/${base64Contact}`, undefined, { scroll: false })
+          }
+
+      }
+  }
+
+  const handleSubmitMessage = async (event) => {
+    event.preventDefault()
+
+    setMessage(message)
+
+    const response = await axios.post('/api/emailus',{ message: message, url: slug, customerName: contact.name, customerEmail: contact.email } )
+
+    try {
+      
+      const { data } = response
+      
+      router.push(data.url)
+
+      setSm(data.message)
+      setMessage("Message Sent Succesfully")
+      setSr("yes")
+
+    } catch (error) {
+
+      router.push(data.url)
+      setSr("no")
+    }
+   
+  }
 
   return (
     <div>
@@ -203,7 +366,7 @@ console.log(date)
             <div className={styles.container}>
 
                 {/* add breadcrumbs */}
-                <button onClick={ () => callValues() }> click me!</button>
+
                 <section className={styles.inquiryForm} >
                     <MultiStepInquiryForm
                         step={step}
@@ -214,20 +377,34 @@ console.log(date)
                         prevStep={ () => previous() }
                         selectedService={ handleSelectedService }
                         location= { location }
-                        message={ message }
-                        setMessage={ setMessage }
                         handleLocationChange={ handleLocationChange }
                         setLocationValue= { setLocationValue }
                         onLocationValueChange = { onLocationValueChange }
                         areas={ areas }
                         unitCount={ unitCount }
-                        increaseUnitCount= { increaseUnitCount }
-                        decreaseUnitCount= { decreaseUnitCount }
+                        increaseUnitCount={ increaseUnitCount }
+                        decreaseUnitCount={ decreaseUnitCount }
                         setUnitCount={ setUnitCount}
                         date={ date }
                         setDate={ setDate }
-                        isMultiple={ isMultiple }
-                        setIsMultiple={ setIsMultiple }
+                        today={ today }
+                        range={ range }
+                        setRange= { setRange }
+                        disabledDays= { disabledDays }
+                        footer={ footer }
+                        setIsMultipleDay={ setIsMultipleDay }
+                        onRadioBlur={ onRadioBlur }
+                        handleMultipleDateChange={ handleMultipleDateChange }
+                        handleDayBlur={ handleDayBlur }
+                        contact={ contact }
+                        setContact={ setContact }
+                        handleContactChange={ handleContactChange }
+                        onContactValueChange={ onContactValueChange }
+                        handleSubmitMessage={ handleSubmitMessage }
+                        message={ message }
+                        setMessage={ setMessage }
+                        sm={ sm }
+                        sr={ sr }
                     />
                 </section>
             </div>

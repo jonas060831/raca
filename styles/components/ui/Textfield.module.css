@@ -16,7 +16,7 @@
     padding-left: 3.3rem;
     color: var(--secondary-color);
     font-size: 1.3em;
-    caret-color: white;
+    caret-color: var(--secondary-color);
 }
 
 .inputcontainer input[type=text]:focus {

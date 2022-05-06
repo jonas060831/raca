@@ -6,8 +6,13 @@
 }
 
 .content {
-    height: 50vh;
+    height: 80vh;
+    max-height: 100%;
+    display:block;
+    overflow: hidden;
 }
 .action {
     text-align: center;
+    height: auto;
+    margin-bottom: 10vh;
 }

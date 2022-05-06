@@ -1,38 +1,40 @@
 import React, { useCallback, useEffect } from 'react'
-import { useRouter } from 'next/router'
-import { MapPin, Home, Flag, Plus, Minus } from 'react-feather'
-import { DateRange, DayPicker } from 'react-day-picker';
-import 'react-day-picker/dist/style.css';
+import { MapPin, Home, Flag, Plus, Minus, User, Phone, AtSign, Send, CheckCircle, AlertTriangle } from 'react-feather'
 
+
+import { DayPicker } from 'react-day-picker';
+import 'react-day-picker/dist/style.css';
 
 //components
 import StepForm from '../services/inquiry-form/StepForm'
 import TextField from '../ui/TextField'
+import TextField2 from '../ui/TextField2';
 import CircularButton from '../../components/ui/CircularButton'
+import TextArea from '../../components/ui/TextArea'
 
 //styles
 import styles from '../../styles/components/MultiStepInquiryForm.module.css'
 import Select from '../ui/Select'
 
+//helpers
+import { base64StringToJsonObject } from '../../helpers/base64StringToJsonObject';
+
 const MultiStepInquiryForm = (props) => {
-  const {  setStep, slug, step, service, nextStep, prevStep, selectedService, setLocationValue, handleLocationChange, location, areas, onLocationValueChange, unitCount, setUnitCount, increaseUnitCount, decreaseUnitCount, date, setDate, isMultiple, setIsMultiple } = props
+  const { setStep, slug, step, service, nextStep, prevStep, selectedService, setLocationValue, handleLocationChange, location, areas, onLocationValueChange, unitCount, setUnitCount, increaseUnitCount, decreaseUnitCount, date, setDate, today, range, setRange, disabledDays, footer, setIsMultipleDay, onRadioBlur, handleMultipleDateChange, handleDayBlur, handleContactChange, setContact, onContactValueChange, handleSubmitMessage, message, setMessage, sm, sr } = props
   const { street1, street2, CityOrMunicipality } = props.location
-  const router = useRouter()
-
-  //7 cases
-  //button cases initial,next, submit
-
+  const { name, phone, email } = props.contact
+    
   const autoFocus = useCallback(el => el ? el.focus() : null, [])
 
   useEffect(() => {
-
         if (slug.length > step) {
           setStep(slug.length)
         }
 
-        
         if (slug.length === 1) {
-            selectedService(service)    
+            //resest the service
+            selectedService(service)
+
         } else if (slug.length === 2) {
 
             //resest the service
@@ -41,11 +43,7 @@ const MultiStepInquiryForm = (props) => {
             //set the address from url /service/serviceId/locationBase64
             const locationBase64String = slug[1]
             
-            const buff = Buffer.from(locationBase64String, 'base64')
-
-            const jsonStr = buff.toString('utf-8')
-            
-            const jsonObject = JSON.parse(jsonStr)
+            const jsonObject = base64StringToJsonObject(locationBase64String)
 
             setLocationValue(jsonObject)
 
@@ -56,17 +54,11 @@ const MultiStepInquiryForm = (props) => {
 
             //set the address from url /service/serviceId/locationBase64
             const locationBase64String = slug[1]
-            
-            const buff = Buffer.from(locationBase64String, 'base64')
-
-            const jsonStr = buff.toString('utf-8')
-            
-            const jsonObject = JSON.parse(jsonStr)
-
+            const jsonObject = base64StringToJsonObject(locationBase64String)
             setLocationValue(jsonObject)
 
+            //update unit
             const unitCount = parseInt(slug[2])
-
             setUnitCount(unitCount)
 
         } else if (slug.length === 4) {
@@ -77,63 +69,171 @@ const MultiStepInquiryForm = (props) => {
 
             //set the address from url /service/serviceId/locationBase64
             const locationBase64String = slug[1]
-            
-            const buff = Buffer.from(locationBase64String, 'base64')
-
-            const jsonStr = buff.toString('utf-8')
-            
-            const jsonObject = JSON.parse(jsonStr)
-
+            const jsonObject = base64StringToJsonObject(locationBase64String)
             setLocationValue(jsonObject)
 
+            //update unit
             const unitCount = parseInt(slug[2])
-
             setUnitCount(unitCount)
 
+            const base64Date = slug[3]
+            const newDate = base64StringToJsonObject(base64Date)
 
-            const date = slug[3]
-            var d = new Date(0)
-            var epochDate = d.setUTCSeconds(date)
-            setDate(new Date(epochDate))
+            setDate(newDate)
 
+            const newRange = { from: new Date(newDate.multiple.from), to: new Date(newDate.multiple.to) }
+            setRange(newRange)
+            
+        } else if (slug.length === 5) {
+            //set the value of date
+
+            //resest the service
+            selectedService(service)  
+
+            //set the address from url /service/serviceId/locationBase64
+            const locationBase64String = slug[1]
+            const jsonObject = base64StringToJsonObject(locationBase64String)
+            setLocationValue(jsonObject)
+
+            //update unit
+            const unitCount = parseInt(slug[2])
+            setUnitCount(unitCount)
+
+            const base64Date = slug[3]
+            const newDate = base64StringToJsonObject(base64Date)
+
+            setDate(newDate)
+
+            const newRange = { from: new Date(newDate.multiple.from), to: new Date(newDate.multiple.to) }
+            setRange(newRange)
+
+            const base64Contact = slug[4]
+            const newContact = base64StringToJsonObject(base64Contact)
+
+            setContact(newContact)
+
+            generateMessage()
+            
+        } else if (slug.length === 6) {
+            //set the value of date
+
+            //resest the service
+            selectedService(service)  
+
+            //set the address from url /service/serviceId/locationBase64
+            const locationBase64String = slug[1]
+            const newLocation = base64StringToJsonObject(locationBase64String)
+            setLocationValue(newLocation)
+
+            //update unit
+            const unitCount = parseInt(slug[2])
+            setUnitCount(unitCount)
+
+            const base64Date = slug[3]
+            const date = base64StringToJsonObject(base64Date)
+
+            setDate(date)
+
+            const newRange = { from: new Date(date.multiple.from), to: new Date(date.multiple.to) }
+            setRange(newRange)
+
+            const base64Contact = slug[4]
+            const newContact = base64StringToJsonObject(base64Contact)
+
+            setContact(newContact)
+            
+            generateMessage()
         }
   }, [])
 
-  
+  const generateMessage = () => {
 
+    const locationBase64String = slug[1]
+    const newLocation = base64StringToJsonObject(locationBase64String)
+
+    const base64Date = slug[3]
+    const newDate = base64StringToJsonObject(base64Date)
+
+
+    const base64Contact = slug[4]
+    const newContact = base64StringToJsonObject(base64Contact)
+
+    //message
+    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const beginDate = new Date(newDate.multiple.from).toLocaleDateString("en-US", options)
+    const endDate = new Date(newDate.multiple.to).toLocaleDateString("en-US", options)
+    
+    const renderDate = newDate.isMultiple === true ? `between the dates of ${beginDate} until ${endDate}. ` : 'single'
+    
+    //const creator = process.env.NEXT_PUBLIC_CREATOR_NAME
+
+    const updatedMessage = `Hi Rent A Cool Air Team,\n\n`+
+                           `\xa0 \xa0 My Name is ${newContact.name} Id like to enquire about your ${service.name} package. I need ${unitCount} air coolers. ` +
+                           `${renderDate}` +
+                           `at this location:\n${newLocation.street1} ${newLocation.street2} ${newLocation.CityOrMunicipality} ${newLocation.district} District\n` +
+                           `\nPlease Contact me at: \n`+
+                           `${newContact.phone}\n${newContact.email}\n\n`+
+                           `Thank You and Have a Great Day!`
+                           //`${creator}`
+
+    setMessage(updatedMessage)
+  }
 
   const renderCalendar = () => {
-
     
-
-    if(isMultiple) {
+    if(date.isMultiple) {
+        const d = date.multiple.to === new Date() && date.multiple.from === new Date() ? today : new Date(date.multiple.to)
         return (
-            <div style={{ width: "300px", margin: "0px auto" }}>
+            <div className={styles.calendarContainer} >
                 <br />
-                <br />
-
+                
                 <DayPicker
                     mode="range"
-                    
+                    defaultMonth={ d }
+                    selected={range}
+                    footer={footer}
+                    onSelect={ handleMultipleDateChange }
+                    fromYear={new Date(new Date().getFullYear())}
+                    toYear={new Date(new Date().getFullYear() + 5 )}
+                    pagedNavigation
+                    disabled={disabledDays}
+                    max={31}
+                    onDayBlur={ () => handleDayBlur() }
                 />
             </div>
         )
-    }
-
-    return (
-            <div style={{ width: "300px", margin: "0px auto" }}>
-                <br />
-                <br />
-
-                <DayPicker
-                />
+    } else {
+        return (
+            <div>
+                <h3>We Currently do not Support Single Day Reservation on this website..</h3>
             </div>
-    )
+        )
+    }
+  }
 
+  const renderServerMessage = () => {
+
+       switch (sr) {
+           case 'yes':
+                return (
+                    <div className={styles.serverResponse}>
+                        <p> <CheckCircle /> {sm} Thank You!.</p>
+                    </div>
+                    
+                )
+           case 'no':
+                    <div className={styles.serverResponseNegative}>
+                        <p> <AlertTriangle/> {sm} Sorry!.</p>
+                    </div>
+       
+           default:
+               return (
+                   <></>
+               )
+       }
   }
 
   switch (step) {
-      
       case 1:
           return (
                 <StepForm
@@ -240,15 +340,16 @@ const MultiStepInquiryForm = (props) => {
                 >
                     <section className={styles.step4Content}>
 
-                        <br /><br /><br />
+                        <br />
 
                         <input
                             type="radio"
                             id="singleday"
                             name="daterenderer"
                             value="single"
-                            checked={!isMultiple}
-                            onChange={ () => setIsMultiple(!isMultiple)}
+                            checked={!date.isMultiple}
+                            onChange={ () => setIsMultipleDay(false) }
+                            onBlur={ () => onRadioBlur() }
                         />
                         
                         <label htmlFor="singleday">Single Day</label>
@@ -258,15 +359,94 @@ const MultiStepInquiryForm = (props) => {
                             id="multipleday"
                             name="daterenderer"
                             value="multiple"
-                            checked={isMultiple}
-                            onChange={ () => setIsMultiple(!isMultiple)}
+                            checked={date.isMultiple}
+                            onChange={ () => setIsMultipleDay(true) }
+                            onBlur={ () => onRadioBlur() }
                         />
-                            <label htmlFor="multipleday">Multiple Days</label>
+                        
+                        <label htmlFor="multipleday">Multiple Days</label>
                         
                         { renderCalendar() }
 
                     </section>
 
+                </StepForm>
+            )
+        case 5: 
+            return (
+                <StepForm
+                title="Contact Person"
+                action="next"
+                nextStep={ nextStep }
+                prevStep={ prevStep }
+                >
+                    <section>
+
+                        <br />
+                        <TextField2
+                            value={name}
+                            icon={ <User />}
+                            placeholder="Name"
+                            name="name"
+                            onChange={ handleContactChange }
+                            onContactValueChange= { onContactValueChange }
+                        />
+                        <br />
+                        <TextField2
+                            value={phone}
+                            icon={ <Phone />}
+                            placeholder="Phone Number"
+                            name="phone"
+                            onChange={ handleContactChange }
+                            onContactValueChange= { onContactValueChange }
+                        />
+                        <br />
+                        <TextField2 
+                            value={email}
+                            icon={ <AtSign />}
+                            placeholder="Valid Email Address"
+                            name="email"
+                            onChange={ handleContactChange }
+                            onContactValueChange= { onContactValueChange }
+                        />
+                    </section>
+                
+                </StepForm>
+            )
+        case 6:
+
+            const isSent = sr === 'yes' ? true : false
+            return (
+                <StepForm
+                title="Send Message"
+                action="submit"
+                nextStep={ nextStep }
+                prevStep={ prevStep }
+                >
+                    <section className={styles.step6} >
+                        <br /><br /><br />
+                        <div className={styles.messageContainer}>
+
+                            <form onSubmit={ handleSubmitMessage }>
+
+                                <section >
+                                    {renderServerMessage()}
+                                </section>
+                                <br />
+
+                                <TextArea 
+                                    name="message"
+                                    id="message"
+                                    value={message}
+                                    setValue={ setMessage }
+                                />
+                                
+                                <button disabled={isSent}><Send /></button>
+
+                            </form>
+                        </div>
+                        
+                    </section>
                 </StepForm>
             )
       default:

@@ -1,0 +1,15 @@
+.textarea {
+    width: 100%;
+    background-color: transparent;
+    height: 100%;
+    outline: none;
+    position:relative;
+    color: var(--secondary-color);
+    caret-color: var(--secondary-color);
+    white-space: pre-wrap;
+    border-radius: 10px;
+    border: 3px solid var(--secondary-color);
+    padding: 1rem;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 17px;
+}
