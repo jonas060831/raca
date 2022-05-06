@@ -10,6 +10,8 @@ const handler = (req, res) => {
     if (req.method === "POST") {
         var transporter = nodemailer.createTransport({
             service: 'gmail',
+            port: 465,
+            secure: true,
             auth: {
                 user: username,
                 pass: password
