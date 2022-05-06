@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react'
 import Navbar from '../navbar/Navbar.js'
 import Footer from '../footer/Footer.js'
+import MessengerCustomerChat from 'react-messenger-customer-chat';
+
 
 const Layout = (props) => {
   return (
@@ -10,6 +12,11 @@ const Layout = (props) => {
         <main>
             {props.children}
         </main>
+        
+        <MessengerCustomerChat
+          pageId="108805890955489"
+          appId="717603269657290"
+        />
 
         <Footer/>
     </Fragment>
