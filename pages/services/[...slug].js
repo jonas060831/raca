@@ -340,7 +340,6 @@ const onContactValueChange = () => {
       
       const { data } = response
       
-      router.push(data.url)
 
       setSm(data.message)
       setMessage("Message Sent Succesfully")
@@ -348,7 +347,6 @@ const onContactValueChange = () => {
 
     } catch (error) {
 
-      router.push(data.url)
       setSr("no")
     }
    
