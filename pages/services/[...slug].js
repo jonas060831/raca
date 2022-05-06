@@ -340,13 +340,13 @@ const onContactValueChange = () => {
       
       const { data } = response
       
-
+      console.log(data)
       setSm(data.message)
       setMessage("Message Sent Succesfully")
       setSr("yes")
 
     } catch (error) {
-
+      console.log(error)
       setSr("no")
     }
    
