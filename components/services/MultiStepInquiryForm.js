@@ -20,7 +20,7 @@ import Select from '../ui/Select'
 import { base64StringToJsonObject } from '../../helpers/base64StringToJsonObject';
 
 const MultiStepInquiryForm = (props) => {
-  const { setStep, slug, step, service, nextStep, prevStep, selectedService, setLocationValue, handleLocationChange, location, areas, onLocationValueChange, unitCount, setUnitCount, increaseUnitCount, decreaseUnitCount, date, setDate, today, range, setRange, disabledDays, footer, setIsMultipleDay, onRadioBlur, handleMultipleDateChange, handleDayBlur, handleContactChange, setContact, onContactValueChange, handleSubmitMessage, message, setMessage, sm, sr } = props
+  const { setStep, slug, step, service, nextStep, prevStep, selectedService, setLocationValue, handleLocationChange, location, areas, onLocationValueChange, unitCount, setUnitCount, increaseUnitCount, decreaseUnitCount, date, setDate, today, range, setRange, disabledDays, footer, setIsMultipleDay, onRadioBlur, handleMultipleDateChange, handleDayBlur, handleContactChange, setContact, onContactValueChange, handleSubmitMessage, message, setMessage, sm, sr, isLoading } = props
   const { street1, street2, CityOrMunicipality } = props.location
   const { name, phone, email } = props.contact
     
@@ -416,6 +416,7 @@ const MultiStepInquiryForm = (props) => {
         case 6:
 
             const isSent = sr === 'yes' ? true : false
+            const b = isLoading === true ? 'Sending..' : <Send /> 
             return (
                 <StepForm
                 title="Send Message"
@@ -441,7 +442,7 @@ const MultiStepInquiryForm = (props) => {
                                     setValue={ setMessage }
                                 />
                                 
-                                <button disabled={isSent}><Send /></button>
+                                <button disabled={isSent}> { b } </button>
 
                             </form>
                         </div>

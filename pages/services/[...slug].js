@@ -45,6 +45,7 @@ const InquiryPage = () => {
   const [contact, setContact] = useState({ name: '', phone: '', email: '' })
   const [sr, setSr] = useState('initial')
   const [sm, setSm] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
   
   const [date, setDate] = useState({ isMultiple: true, single: { date: new Date(), start: '', end: '' }, multiple: { from: today, to: addDays(today, 2), start: '', end: '' } })
   const [range, setRange] = useState({ from: today, to: addDays(today, 2)})
@@ -330,6 +331,9 @@ const onContactValueChange = () => {
   }
 
   const handleSubmitMessage = async (event) => {
+    
+    setIsLoading(true)
+    
     event.preventDefault()
 
     setMessage(message)
@@ -344,6 +348,7 @@ const onContactValueChange = () => {
       setSm(data.message)
       setMessage("Message Sent Succesfully")
       setSr("yes")
+      setIsLoading(false)
 
     } catch (error) {
       console.log(error)
@@ -403,6 +408,7 @@ const onContactValueChange = () => {
                         setMessage={ setMessage }
                         sm={ sm }
                         sr={ sr }
+                        isLoading={ isLoading }
                     />
                 </section>
             </div>
