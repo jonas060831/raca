@@ -17,9 +17,6 @@ import { validUrl } from '../helpers/validUrl'
 
 const Home = () => {
 
-  
-
-
   const insertSeeAll = (arr, remaining, index) => {
     var s = arr
     var seeall = { id: 8, name: "See All", thumbnail: "/media/images/services/images/thumbnail.png" }
@@ -57,8 +54,8 @@ const Home = () => {
                 id={styles.companyLogo}
             />
 
-            <p id={styles.headerTitle} > Start your Day with rentacoolair </p>
-            <p id={styles.headerSubtitle}>Trusted by Many love by everyone Nationwide.</p>
+            <p id={styles.headerTitle} > Start your Event with rentacoolair </p>
+            <p id={styles.headerSubtitle}>Trusted by Many love by everyone.</p>
           </section>
 
             

@@ -150,7 +150,7 @@ const InquiryPage = () => {
     //const creator = process.env.NEXT_PUBLIC_CREATOR_NAME
 
     const updatedMessage = `Hi Rent A Cool Air Team,\n\n`+
-                           `\xa0 \xa0 My Name is ${newContact.name} Id like to enquire about your ${service.name} package. I need ${unitCount} air coolers. ` +
+                           `\xa0 \xa0 My Name is ${newContact.name} I would like to inquire about your ${service.name} package. I need ${unitCount} air coolers. ` +
                            `${renderDate}` +
                            `at this location:\n${newLocation.street1} ${newLocation.street2} ${newLocation.CityOrMunicipality} ${newLocation.district} District\n` +
                            `\nPlease Contact me at: \n`+
