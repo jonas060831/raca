@@ -122,14 +122,26 @@
   margin: 0px auto;
   text-align: center;
   margin-top: 15rem;
-  gap: 2rem;
+  margin-bottom: 15rem;
+  gap: 1rem;
 
 }
 
 .facebookreviews iframe {
   width: 90%;
-
+  height: auto;
+  border: none;
+  height: 16.6rem;
 }
+
+.secondiframe {
+  height: 20rem;
+}
+.facebookreviews iframe {
+  height: 12.6rem;
+}
+
+
 /* MOBILES */
 
 @media only screen and (max-width: 600px) {
