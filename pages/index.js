@@ -111,7 +111,7 @@ const Home = () => {
 
           <section className={styles.requesAFreeQuote}>
 
-                <button onClick={ () => router.push('/contactus') }>
+                <button onClick={ () => router.push('/services') }>
                     REQUEST A FREE <br /> QUOTE
                 </button>
 

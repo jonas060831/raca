@@ -62,6 +62,12 @@ const InquiryPage = () => {
       );
     }
   }
+  const footer2 = new Date(date.single.date) ? (
+    <p>You selected {format(new Date(date.single.date), 'PPP')}.</p>
+  ) : (
+    <p>Please pick a day.</p>
+  );
+
 
   if (!slug) {
     return <p className="center">Loading...</p>
@@ -134,6 +140,8 @@ const InquiryPage = () => {
     const locationBase64String = slug[1]
     const newLocation = base64StringToJsonObject(locationBase64String)
 
+    const unit = slug[2]
+
     const base64Date = slug[3]
     const newDate = base64StringToJsonObject(base64Date)
 
@@ -144,13 +152,14 @@ const InquiryPage = () => {
     var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const beginDate = new Date(newDate.multiple.from).toLocaleDateString("en-US", options)
     const endDate = new Date(newDate.multiple.to).toLocaleDateString("en-US", options)
+    const selectedDate = new Date(date.single.date).toLocaleDateString("en-US", options)
     
-    const renderDate = newDate.isMultiple === true ? `between the dates of ${beginDate} until ${endDate}. ` : 'single'
+    const renderDate = newDate.isMultiple === true ? `between the dates of ${beginDate} until ${endDate}. ` : `on ${selectedDate} `
     
     //const creator = process.env.NEXT_PUBLIC_CREATOR_NAME
 
     const updatedMessage = `Hi Rent A Cool Air Team,\n\n`+
-                           `\xa0 \xa0 My Name is ${newContact.name} I would like to inquire about your ${service.name} package. I need ${unitCount} air coolers. ` +
+                           `\xa0 \xa0 My Name is ${newContact.name} I would like to inquire about your ${service.name} package. I need ${unit} air coolers. ` +
                            `${renderDate}` +
                            `at this location:\n${newLocation.street1} ${newLocation.street2} ${newLocation.CityOrMunicipality} ${newLocation.district} District\n` +
                            `\nPlease Contact me at: \n`+
@@ -192,6 +201,14 @@ const InquiryPage = () => {
         multiple: { from: updatedDate.from, to: updatedDate.to, start: date.multiple.start, end: date.multiple.end }
       }))
     }
+  }
+
+  const handleDateChange = (updatedDate) => {
+
+    setDate(state => ({
+      ...state,
+      single: { date: updatedDate, start: date.single.start, end: date.single.end }
+    }))
   }
 
   const handleDayBlur = () => {
@@ -394,9 +411,11 @@ const onContactValueChange = () => {
                         setRange= { setRange }
                         disabledDays= { disabledDays }
                         footer={ footer }
+                        footer2={ footer2 }
                         setIsMultipleDay={ setIsMultipleDay }
                         onRadioBlur={ onRadioBlur }
                         handleMultipleDateChange={ handleMultipleDateChange }
+                        handleDateChange={ handleDateChange }
                         handleDayBlur={ handleDayBlur }
                         contact={ contact }
                         setContact={ setContact }

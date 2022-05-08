@@ -20,7 +20,7 @@ import Select from '../ui/Select'
 import { base64StringToJsonObject } from '../../helpers/base64StringToJsonObject';
 
 const MultiStepInquiryForm = (props) => {
-  const { setStep, slug, step, service, nextStep, prevStep, selectedService, setLocationValue, handleLocationChange, location, areas, onLocationValueChange, unitCount, setUnitCount, increaseUnitCount, decreaseUnitCount, date, setDate, today, range, setRange, disabledDays, footer, setIsMultipleDay, onRadioBlur, handleMultipleDateChange, handleDayBlur, handleContactChange, setContact, onContactValueChange, handleSubmitMessage, message, setMessage, sm, sr, isLoading } = props
+  const { setStep, slug, step, service, nextStep, prevStep, selectedService, setLocationValue, handleLocationChange, location, areas, onLocationValueChange, unitCount, setUnitCount, increaseUnitCount, decreaseUnitCount, date, setDate, today, range, setRange, disabledDays, footer, footer2, setIsMultipleDay, onRadioBlur, handleMultipleDateChange, handleDateChange, handleDayBlur, handleContactChange, setContact, onContactValueChange, handleSubmitMessage, message, setMessage, sm, sr, isLoading } = props
   const { street1, street2, CityOrMunicipality } = props.location
   const { name, phone, email } = props.contact
     
@@ -151,6 +151,8 @@ const MultiStepInquiryForm = (props) => {
     const locationBase64String = slug[1]
     const newLocation = base64StringToJsonObject(locationBase64String)
 
+    const unit = slug[2]
+
     const base64Date = slug[3]
     const newDate = base64StringToJsonObject(base64Date)
 
@@ -162,13 +164,15 @@ const MultiStepInquiryForm = (props) => {
     var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const beginDate = new Date(newDate.multiple.from).toLocaleDateString("en-US", options)
     const endDate = new Date(newDate.multiple.to).toLocaleDateString("en-US", options)
+
+    const selectedDate = new Date(date.single.date).toLocaleDateString("en-US", options)
     
-    const renderDate = newDate.isMultiple === true ? `between the dates of ${beginDate} until ${endDate}. ` : 'single'
+    const renderDate = newDate.isMultiple === true ? `between the dates of ${beginDate} until ${endDate}. ` : `on ${selectedDate} `
     
     //const creator = process.env.NEXT_PUBLIC_CREATOR_NAME
 
     const updatedMessage = `Hi Rent A Cool Air Team,\n\n`+
-                           `\xa0 \xa0 My Name is ${newContact.name} I would like to inquire about your ${service.name} package. I need ${unitCount} air coolers. ` +
+                           `\xa0 \xa0 My Name is ${newContact.name} I would like to inquire about your ${service.name} package. I need ${unit} air coolers. ` +
                            `${renderDate}` +
                            `at this location:\n${newLocation.street1} ${newLocation.street2} ${newLocation.CityOrMunicipality} ${newLocation.district} District\n` +
                            `\nPlease Contact me at: \n`+
@@ -203,9 +207,22 @@ const MultiStepInquiryForm = (props) => {
             </div>
         )
     } else {
+        const d = date.single.date === new Date() ? new Date() : new Date(date.single.date)
         return (
-            <div>
-                <h3>We Currently do not Support Single Day Reservation on this website..</h3>
+            <div className={styles.calendarContainer} >
+                <br />
+                
+                <DayPicker
+                    mode="single"
+                    defaultMonth={ d }
+                    selected={ new Date(date.single.date) }
+                    footer={footer2}
+                    onSelect={ handleDateChange }
+                    fromYear={new Date(new Date().getFullYear())}
+                    toYear={new Date(new Date().getFullYear() + 5 )}
+                    disabled={disabledDays}
+                    onDayBlur={ () => handleDayBlur() }
+                />
             </div>
         )
     }
