@@ -26,19 +26,12 @@ const Home = () => {
 
   const router = useRouter()
   const phd = getAllProductHighlights()
-  const ref = useRef()
   var s = getServices()
   var na = []
   //dont use state just regular array function
   na.push(...s)
   //this will return the updated array value without altering the original services array
   var tv = insertSeeAll(na, 3, 7)
-
-  const [height, setHeight] = useState("0px");
-  const onLoad = () => {
-    setHeight(ref.current.contentWindow.document.body.scrollHeight + "px");
-  };
-
 
   return (
     <div>
@@ -97,12 +90,7 @@ const Home = () => {
           <section className={styles.facebookreviews}>
 
             <iframe
-              ref={ref}
-              onLoad={onLoad}
-              id="f1"
               src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Frenztorvicq%2Fposts%2F4868720663140019&show_text=true&width=500"
-              height={height}
-              scrolling="no"
               allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
               
             >
