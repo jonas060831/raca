@@ -156,7 +156,6 @@ const InquiryPage = () => {
                            `\nPlease Contact me at: \n`+
                            `${newContact.phone}\n${newContact.email}\n\n`+
                            `Thank You and Have a Great Day!`
-                           //`${creator}`
 
     setMessage(updatedMessage)
   }

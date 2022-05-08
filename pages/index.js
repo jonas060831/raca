@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import styles from '../styles/Home.module.css'
 
 //components
@@ -26,13 +26,18 @@ const Home = () => {
 
   const router = useRouter()
   const phd = getAllProductHighlights()
-
+  const ref = useRef()
   var s = getServices()
   var na = []
   //dont use state just regular array function
   na.push(...s)
   //this will return the updated array value without altering the original services array
   var tv = insertSeeAll(na, 3, 7)
+
+  const [height, setHeight] = useState("0px");
+  const onLoad = () => {
+    setHeight(ref.current.contentWindow.document.body.scrollHeight + "px");
+  };
 
 
   return (
@@ -92,27 +97,28 @@ const Home = () => {
           <section className={styles.facebookreviews}>
 
             <iframe
-                style={{ style:"border:none;overflow:hidden",scrolling:"no",frameborder:"0", allowfullscreen:"true",allow:"autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"}}
-                src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Frenztorvicq%2Fposts%2F4868720663140019&show_text=true&width=500"
-              >
-            </iframe>
+              ref={ref}
+              onLoad={onLoad}
+              id="f1"
+              src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Frenztorvicq%2Fposts%2F4868720663140019&show_text=true&width=500"
+              height={height}
+              scrolling="no"
+              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
               
-              <br /><br />
+            >
+            </iframe>
 
-              <iframe
-                style={{ style:"border:none;overflow:hidden",scrolling:"no",frameborder:"0", allowfullscreen:"true",allow:"autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"}}
-                src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fcailapiedad13%2Fposts%2F2790923777867383&show_text=true&width=500"
-              >            
-              </iframe>
+            <iframe
+              src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fcailapiedad13%2Fposts%2F2790923777867383&show_text=true&width=500"
+              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+            >
+            </iframe>
 
-              <br /><br />
-
-              <iframe
-                src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fheather.albis%2Fposts%2F4258899234134417&show_text=true&width=500"
+            <iframe
+              src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fheather.albis%2Fposts%2F4258899234134417&show_text=true&width=500"
+              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
               >
               </iframe>
-
-
           </section>
 
           <section className={styles.requesAFreeQuote}>
