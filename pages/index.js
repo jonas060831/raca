@@ -88,6 +88,34 @@ const Home = () => {
                 </div>
           </section>
 
+          <section className={styles.facebookreviews} >
+            
+
+            <iframe 
+              src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Frenztorvicq%2Fposts%2F4868720663140019&show_text=true&width=500"
+              //width="500" height="244" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+            >
+            </iframe>
+            
+            <br /><br />
+
+            <iframe
+              //style={{width:"500",height:"168", style:"border:none;overflow:hidden",scrolling:"no",frameborder:"0", allowfullscreen:"true",allow:"autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"}}
+              src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fcailapiedad13%2Fposts%2F2790923777867383&show_text=true&width=500"
+            >            
+            </iframe>
+
+            <br /><br />
+                
+            <iframe
+              src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fheather.albis%2Fposts%2F4258899234134417&show_text=true&width=500"
+              //</section>width="500" height="186" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+              >
+              </iframe>
+            
+
+          </section>
+
           <section className={styles.requesAFreeQuote}>
 
                 <button onClick={ () => router.push('/contactus') }>

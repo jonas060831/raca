@@ -13,7 +13,7 @@ const phd = [
     },
     {
       id: 3,
-      title: "Controlled temperature gauranteed",
+      title: "Controlled temperature guaranteed",
       description: "Iwata Evaporative Air Cooler will certainly bring down the air temperature lesser by about 5 degrees compared to any industrial fan.",
       image: "/media/images/product-highlight/fan_ice.png"
     },
