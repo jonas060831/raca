@@ -165,7 +165,7 @@ const MultiStepInquiryForm = (props) => {
     const beginDate = new Date(newDate.multiple.from).toLocaleDateString("en-US", options)
     const endDate = new Date(newDate.multiple.to).toLocaleDateString("en-US", options)
 
-    const selectedDate = new Date(date.single.date).toLocaleDateString("en-US", options)
+    const selectedDate = new Date(newDate.single.date).toLocaleDateString("en-US", options)
     
     const renderDate = newDate.isMultiple === true ? `between the dates of ${beginDate} until ${endDate}. ` : `on ${selectedDate} `
     
