@@ -6,7 +6,7 @@ import styles from '../styles/Home.module.css'
 //components
 import HeadSEO from '../components/seo/HeadSEO'
 import ProductHighlights from '../components/landingpage/productHighlights'
-import Modal1 from '../components/modals/Modal1'
+import BasicModal from '../components/modals/BasicModal'
 import Button from '../components/ui/Button'
 
 //datas
@@ -141,7 +141,7 @@ const Home = () => {
                   alt="/public/media/images/homepage/checkusout.jpg"
                 />
 
-              <Modal1
+              <BasicModal
                 onClose={() => setShowModal(false)}
                 show={showModal}
               >
@@ -158,7 +158,7 @@ const Home = () => {
                       handleClick={ () => router.replace("https://www.facebook.com/rentacoolair") }
                     />
                 </Link>
-              </Modal1>
+              </BasicModal>
 
             </div>
 

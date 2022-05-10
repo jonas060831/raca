@@ -4,7 +4,7 @@ import styles from "../../styles/components/modals/modal1.module.css";
 import { X } from "react-feather";
 
 
-const Modal1 = ({ show, onClose, children, title }) => {
+const BasicModal = ({ show, onClose, children, title }) => {
   const [isBrowser, setIsBrowser] = useState(false);
 
   useEffect(() => {
@@ -51,4 +51,4 @@ const Modal1 = ({ show, onClose, children, title }) => {
   }
 }
 
-export default Modal1
+export default BasicModal
