@@ -8,7 +8,7 @@ const phd = [
     {
       id: 2,
       title: "Great for outdoor events",
-      description: "Will definitely work indoors but it is great for outdoor events as well. Tried and tested by our long term customers.",
+      description: "Will definitely work indoors, but it is great for outdoor events as well. Tried and tested by our long term customers.",
       image: "/media/images/product-highlight/outdoor.png"
     },
     {

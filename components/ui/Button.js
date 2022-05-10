@@ -4,7 +4,7 @@ import React from 'react'
 //styles
 import styles from '../../styles/components/ui/Button.module.css'
 
-const Button = ({ title, type, icon, handleClick, iconRight }) => {
+const Button = ({ title, type, icon, handleClick, iconRight, isSent }) => {
   
 
   const renderIcon = () => {
@@ -30,11 +30,13 @@ const Button = ({ title, type, icon, handleClick, iconRight }) => {
     )
   }
   switch (type) {
+
       case 'main':
         return (
             <div className={styles.main}>
                 <button
-                    onClick={ () => handleClick() }
+                    disabled={ isSent }
+                    onClick={ (e) => handleClick(e) }
                 >    
                     {renderIcon(icon, title )}   
                       

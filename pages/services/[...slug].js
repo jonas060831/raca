@@ -47,7 +47,7 @@ const InquiryPage = () => {
   const [sm, setSm] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   
-  const [date, setDate] = useState({ isMultiple: true, single: { date: new Date(), start: '', end: '' }, multiple: { from: today, to: addDays(today, 2), start: '', end: '' } })
+  const [date, setDate] = useState({ isMultiple: false, single: { date: new Date(), start: '', end: '' }, multiple: { from: today, to: addDays(today, 2), start: '', end: '' } })
   const [range, setRange] = useState({ from: today, to: addDays(today, 2)})
 
   let footer = <p>Please pick the first day.</p>;
@@ -62,7 +62,8 @@ const InquiryPage = () => {
       );
     }
   }
-  const footer2 = new Date(date.single.date) ? (
+  const footer2 = new Date(date.single.date) === undefined ? (
+
     <p>You selected {format(new Date(date.single.date), 'PPP')}.</p>
   ) : (
     <p>Please pick a day.</p>
@@ -159,7 +160,7 @@ const InquiryPage = () => {
     //const creator = process.env.NEXT_PUBLIC_CREATOR_NAME
 
     const updatedMessage = `Hi Rent A Cool Air Team,\n\n`+
-                           `\xa0 \xa0 My Name is ${newContact.name} I would like to inquire about your ${service.name} package. I need ${unit} air coolers. ` +
+                           `\xa0 \xa0 My Name is ${newContact.name} I would like to inquire about your ${service.name} package. I need ${unit} air cooler ` +
                            `${renderDate}` +
                            `at this location:\n${newLocation.street1} ${newLocation.street2} ${newLocation.CityOrMunicipality} ${newLocation.district} District\n` +
                            `\nPlease Contact me at: \n`+
@@ -365,6 +366,7 @@ const onContactValueChange = () => {
       setMessage("Message Sent Succesfully")
       setSr("yes")
       setIsLoading(false)
+      window.scrollTo(0,0)
 
     } catch (error) {
       console.log(error)
@@ -411,7 +413,7 @@ const onContactValueChange = () => {
                         setRange= { setRange }
                         disabledDays= { disabledDays }
                         footer={ footer }
-                        footer2={ footer2 }
+                        //footer2={ footer2 }
                         setIsMultipleDay={ setIsMultipleDay }
                         onRadioBlur={ onRadioBlur }
                         handleMultipleDateChange={ handleMultipleDateChange }

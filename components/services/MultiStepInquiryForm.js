@@ -172,7 +172,7 @@ const MultiStepInquiryForm = (props) => {
     //const creator = process.env.NEXT_PUBLIC_CREATOR_NAME
 
     const updatedMessage = `Hi Rent A Cool Air Team,\n\n`+
-                           `\xa0 \xa0 My Name is ${newContact.name} I would like to inquire about your ${service.name} package. I need ${unit} air coolers. ` +
+                           `\xa0 \xa0 My Name is ${newContact.name} I would like to inquire about your ${service.name} package. I need ${unit} air cooler ` +
                            `${renderDate}` +
                            `at this location:\n${newLocation.street1} ${newLocation.street2} ${newLocation.CityOrMunicipality} ${newLocation.district} District\n` +
                            `\nPlease Contact me at: \n`+
@@ -216,7 +216,7 @@ const MultiStepInquiryForm = (props) => {
                     mode="single"
                     defaultMonth={ d }
                     selected={ new Date(date.single.date) }
-                    footer={footer2}
+                    //footer={footer2}
                     onSelect={ handleDateChange }
                     fromYear={new Date(new Date().getFullYear())}
                     toYear={new Date(new Date().getFullYear() + 5 )}
@@ -440,12 +440,14 @@ const MultiStepInquiryForm = (props) => {
                 action="submit"
                 nextStep={ nextStep }
                 prevStep={ prevStep }
+                handleSubmitMessage={ handleSubmitMessage }
+                isSent={ isSent }
                 >
                     <section className={styles.step6} >
                         <br /><br /><br />
                         <div className={styles.messageContainer}>
 
-                            <form onSubmit={ handleSubmitMessage }>
+                            <form name="FormMessage" onSubmit={ handleSubmitMessage }>
 
                                 <section >
                                     {renderServerMessage()}
@@ -466,6 +468,12 @@ const MultiStepInquiryForm = (props) => {
                         
                     </section>
                 </StepForm>
+            )
+        case 7:
+            return (
+                <div>
+                    123 
+                </div>
             )
       default:
             return (

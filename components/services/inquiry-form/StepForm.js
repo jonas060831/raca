@@ -9,7 +9,7 @@ import Button from '../../ui/Button'
 import styles from '../../../styles/components/StepForm.module.css'
 const StepForm = (props) => {
 
-  const { title, action, nextStep, prevStep } = props
+  const { title, action, nextStep, prevStep, handleSubmitMessage, isSent } = props
 
   const router = useRouter()
   
@@ -66,13 +66,14 @@ const StepForm = (props) => {
                         handleClick={ prevStep }
                         />
                         &nbsp;&nbsp;
-                        {/* <Button
+                        <Button
                         title="Submit"
                         type="main"
                         icon={<Send />}
                         iconRight={true}
                         handleClick={ handleSubmitMessage }
-                        /> */}
+                        isSent={ isSent }
+                        />
                     </div> 
               )
          default:

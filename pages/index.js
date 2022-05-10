@@ -1,10 +1,13 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState, useRef } from 'react'
+import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 
 //components
 import HeadSEO from '../components/seo/HeadSEO'
 import ProductHighlights from '../components/landingpage/productHighlights'
+import Modal1 from '../components/modals/Modal1'
+import Button from '../components/ui/Button'
 
 //datas
 import { getAllProductHighlights } from '../datas/productHighlights.js'
@@ -14,8 +17,10 @@ import { getServices } from '../datas/services'
 import { validUrl } from '../helpers/validUrl'
 
 
-
 const Home = () => {
+
+  const [showModal, setShowModal] = useState(false);
+
 
   const insertSeeAll = (arr, remaining, index) => {
     var s = arr
@@ -52,8 +57,8 @@ const Home = () => {
                 id={styles.companyLogo}
             />
 
-            <p id={styles.headerTitle} > Start your Event with rentacoolair </p>
-            <p id={styles.headerSubtitle}>Trusted by Many love by everyone.</p>
+            <p id={styles.headerTitle} > Start your event with rentacoolair </p>
+            <p id={styles.headerSubtitle}>Trusted by many loved by everyone.</p>
           </section>
 
             
@@ -86,9 +91,21 @@ const Home = () => {
                 </div>
           </section>
 
+          <section className={styles.requesAFreeQuote}>
+
+                <button onClick={ () => router.push('/services') }>
+                    REQUEST A FREE <br /> QUOTE
+                </button>
+
+          </section>
 
           <section className={styles.facebookreviews}>
-
+            
+            <div style={{ textAlign: 'center', fontSize: '1.5em' }}>
+              <h1>Testimonials</h1>
+              <h6 style={{ fontStyle: 'italic', fontWeight: 'lighter' }}>Here's what our customer are saying about us</h6>
+            </div>
+                  
             <iframe
               src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Frenztorvicq%2Fposts%2F4868720663140019&show_text=true&width=500"
               allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
@@ -107,16 +124,46 @@ const Home = () => {
               allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
               >
               </iframe>
-          </section>
-
-          <section className={styles.requesAFreeQuote}>
-
-                <button onClick={ () => router.push('/services') }>
-                    REQUEST A FREE <br /> QUOTE
-                </button>
 
           </section>
-          
+
+          <section styles={styles.checkusoutonfacebook}>
+
+            
+            <div className={styles.linktoFBContainer} >
+              {/* <Link href="https://www.facebook.com/rentacoolair"> */}
+                <img
+                  onClick={ () => {
+                      setShowModal(true);
+                      document.body.style.overflow = "hidden"
+                  }}
+                  src="/media/images/homepage/checkusout.jpg"
+                  alt="/public/media/images/homepage/checkusout.jpg"
+                />
+
+              <Modal1
+                onClose={() => setShowModal(false)}
+                show={showModal}
+              >
+                <h3>You are now trying to visit an External Link</h3>
+                
+                <h6>Click OK to Continue</h6>
+
+                <Link href="https://www.facebook.com/rentacoolair">
+                    <Button 
+                      title="OK &nbsp;&nbsp;&nbsp;"
+                      //icon={<Check/>}
+                      iconRight={false}
+                      type="main"
+                      handleClick={ () => router.replace("https://www.facebook.com/rentacoolair") }
+                    />
+                </Link>
+              </Modal1>
+
+            </div>
+
+          </section>
+
           <section>
 
                   <div className={styles.notice1}>
