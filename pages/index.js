@@ -103,7 +103,7 @@ const Home = () => {
             
             <div style={{ textAlign: 'center', fontSize: '1.5em' }}>
               <h1>Testimonials</h1>
-              <h6 style={{ fontStyle: 'italic', fontWeight: 'lighter' }}>Here's what our customer are saying about us</h6>
+              <h6 >Here&rsquo;s what our customer are saying about us</h6>
             </div>
                   
             <iframe
