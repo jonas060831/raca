@@ -431,6 +431,7 @@ const onContactValueChange = () => {
                         setMessage={ setMessage }
                         sm={ sm }
                         sr={ sr }
+                        setSr={ setSr }
                         isLoading={ isLoading }
                     />
                 </section>

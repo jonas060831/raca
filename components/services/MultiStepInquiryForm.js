@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect } from 'react'
-import { MapPin, Home, Flag, Plus, Minus, User, Phone, AtSign, Send, CheckCircle, AlertTriangle } from 'react-feather'
+import Link from 'next/link';
+import { MapPin, Home, Flag, Plus, Minus, User, Phone, AtSign, Send, CheckCircle, AlertTriangle, X, XCircle } from 'react-feather'
 
 
 import { DayPicker } from 'react-day-picker';
@@ -20,7 +21,7 @@ import Select from '../ui/Select'
 import { base64StringToJsonObject } from '../../helpers/base64StringToJsonObject';
 
 const MultiStepInquiryForm = (props) => {
-  const { setStep, slug, step, service, nextStep, prevStep, selectedService, setLocationValue, handleLocationChange, location, areas, onLocationValueChange, unitCount, setUnitCount, increaseUnitCount, decreaseUnitCount, date, setDate, today, range, setRange, disabledDays, footer, footer2, setIsMultipleDay, onRadioBlur, handleMultipleDateChange, handleDateChange, handleDayBlur, handleContactChange, setContact, onContactValueChange, handleSubmitMessage, message, setMessage, sm, sr, isLoading } = props
+  const { setStep, slug, step, service, nextStep, prevStep, selectedService, setLocationValue, handleLocationChange, location, areas, onLocationValueChange, unitCount, setUnitCount, increaseUnitCount, decreaseUnitCount, date, setDate, today, range, setRange, disabledDays, footer, footer2, setIsMultipleDay, onRadioBlur, handleMultipleDateChange, handleDateChange, handleDayBlur, handleContactChange, setContact, onContactValueChange, handleSubmitMessage, message, setMessage, sm, sr, isLoading, setSr } = props
   const { street1, street2, CityOrMunicipality } = props.location
   const { name, phone, email } = props.contact
     
@@ -233,13 +234,20 @@ const MultiStepInquiryForm = (props) => {
        if (sr === "yes") {
             return (
                 <div className={styles.serverResponse}>
-                    <p> <CheckCircle /> {sm} </p>
+                    <div style={{float: 'right', cursor: 'pointer'}}>
+                        <X onClick={ () => setSr("initial") }/>
+                    </div>
+                    <p>
+                        <CheckCircle /> Thank You! {sm} <span className={styles.navigateBackToServices}><Link href='/services'> see other services </Link> </span> </p>
                 </div>
                 
             )
        } else if (sr === "no") {
             return (
                 <div className={styles.serverResponseNegative}>
+                    <div style={{float: 'right', cursor: 'pointer'}}>
+                        <X onClick={ () => setSr("initial") }/>
+                    </div>
                     <p> <AlertTriangle/> {sm} </p>
                 </div>
             )

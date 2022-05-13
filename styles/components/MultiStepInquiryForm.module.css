@@ -77,14 +77,22 @@
     padding: 1rem;
     border-radius: 10px;
     line-height: 1;
+    font-size: 1.6rem;
     color: white;
 }
+
 .serverResponseNegative {
     background-color: rgb(239, 128, 88);
     padding: 1rem;
     border-radius: 10px;
     line-height: 1;
+    font-size: 1.6rem;
     color: white;
+}
+
+
+.navigateBackToServices {
+    color:rgb(84, 84, 240);
 }
 
 /* MOBILES */

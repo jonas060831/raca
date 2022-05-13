@@ -63,7 +63,7 @@ const handler = (req, res) => {
 
 
                 res.status(200).send({
-                    message : 'Email sent Successfully we will be contacting you soon'
+                    message : 'Message received we will be contacting you soon'
                 })
 
 
