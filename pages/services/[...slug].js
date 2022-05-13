@@ -363,13 +363,11 @@ const onContactValueChange = () => {
       
       const { data } = response
 
-      if(data.status === 200) {
         setSm(data.message)
         setMessage("Message Sent Succesfully")
         setSr("yes")
         setIsLoading(false)
         window.scrollTo(0,0)
-      }
 
     } catch (error) {
         setSm(error.response.data.message)

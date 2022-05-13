@@ -79,49 +79,9 @@ const handler = (req, res) => {
         sendEmail({
             subject: `Service Inquiry from ${req.body.customerName}`,
             text: req.body.message,
-            to: "jonas_sulit2001@yahoo.com",
-            from: email
+            to: `System Email ${email}`,
+            from: `New Customer ${email}`
           });
-
-
-        // var transporter = nodemailer.createTransport({
-        //     service: 'gmail',
-        //     port: 465,
-        //     secure: true,
-        //     auth: {
-        //         user: username,
-        //         pass: password
-        //     }
-        // })
-    
-        // var mailOptions = {
-        //     from: `New Customer ${req.body.customerEmail}`,
-        //     to: `${email}`,
-        //     subject: `Service Inquiry from ${req.body.customerName}`,
-        //     text: req.body.message
-        // }
-
-        // try {
-
-        //     transporter.sendMail(mailOptions, (error, info)=> {
-                
-
-        //         if(error) {
-        //             res.status(500).send({
-        //                 message : 'Something went Wrong please try again.'
-        //             }) 
-        //         }
-
-        //         if (info) {
-        //             res.status(200).send({
-        //                 message : 'Email sent Successfully we will be contacting you soon'
-        //             })
-        //         }
-        //     })
-
-        // } catch (error) {
-        //     console.log(error)
-        // }
     }
 }
 
