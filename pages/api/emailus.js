@@ -1,71 +1,127 @@
 var nodemailer = require('nodemailer')
+var { google } = require("googleapis");
+var OAuth2 = google.auth.OAuth2;
 
-const username = process.env.NEXT_PUBLIC_GOOGLE_USERNAME
-const password = process.env.NEXT_PUBLIC_GOOGLE_PASSWORD
-const email = process.env.NEXT_PUBLIC_TARGET_EMAIL
-const env = process.env.NODE_ENV
+const email = process.env.NEXT_PUBLIC_GOOGLE_EMAIL
+const refreshToken = process.env.NEXT_PUBLIC_REFRESH_TOKEN
+const clientSecret = process.env.NEXT_PUBLIC_CLIENT_SECRET
+const clientId = process.env.NEXT_PUBLIC_CLIENT_ID
+
+
+
+//const env = process.env.NODE_ENV
 
 const handler = (req, res) => {
 
     if (req.method === "POST") {
-        var transporter = nodemailer.createTransport({
-            service: 'gmail',
-            port: 465,
-            secure: true,
-            auth: {
-                user: username,
-                pass: password
-            }
-        })
+
+        const createTransporter = async () => {
+            
+            const oauth2Client = new OAuth2(
+                clientId,
+                clientSecret,
+                "https://developers.google.com/oauthplayground"
+            );
     
-        var mailOptions = {
-            from: `New Customer ${req.body.customerEmail}`,
-            to: `${email}`,
-            subject: `Service Inquiry from ${req.body.customerName}`,
-            text: req.body.message
-        }
+            oauth2Client.setCredentials({
+                refresh_token: refreshToken
+            });
+
+            const accessToken = await new Promise((resolve, reject) => {
+                oauth2Client.getAccessToken((err, token) => {
+                  if (err) {
+                    reject("Failed to create access token :(");
+                  }
+                  resolve(token);
+                });
+              });
         
-        //const urlEnvironment = env === 'development' ? 'http:locahost:3000/' : 'https://rentacoolair.com'
+              const transporter = nodemailer.createTransport({
+                service: "gmail",
+                auth: {
+                  type: "OAuth2",
+                  user: email,
+                  accessToken,
+                  clientId: clientId,
+                  clientSecret: clientSecret,
+                  refreshToken: refreshToken
+                },
+                tls: {
+                    rejectUnauthorized: false
+                  }
+              });
 
-        // transporter.sendMail(mailOptions, (error, info)=> {
-        //     try {
-        //         console.log(info)
+              return transporter;
+        }
 
-        //         res.status(200).send({
-        //             message : 'Email sent Successfully we will be contacting you soon',
-        //             url: `${urlEnvironment}/services/${req.body.url[0]}/${req.body.url[1]}/${req.body.url[2]}/${req.body.url[3]}/${req.body.url[4]}/${req.body.url[5]}=true`
-        //         })
-    
-        //     } catch {
-        //         console.log(error)
-        //         res.status(500).send({
-        //             message: 'Something went Wrong Please Try Again',
-        //             url: `${urlEnvironment}/services/${req.body.url[0]}/${req.body.url[1]}/${req.body.url[2]}/${req.body.url[3]}/${req.body.url[4]}/${req.body.url[5]}=false`
-        //         })
+        //emailOptions - who sends what to whom
+        const sendEmail = async (emailOptions) => {
+            
+            try {
+                let emailTransporter = await createTransporter();
+                await emailTransporter.sendMail(emailOptions);
+
+
+                res.status(200).send({
+                    message : 'Email sent Successfully we will be contacting you soon'
+                })
+
+
+            } catch (error) {
+
+                res.status(500).send({
+                    message : 'Something went wrong please try again'
+                })
+            }
+        };
+
+
+        sendEmail({
+            subject: `Service Inquiry from ${req.body.customerName}`,
+            text: req.body.message,
+            to: "jonas_sulit2001@yahoo.com",
+            from: email
+          });
+
+
+        // var transporter = nodemailer.createTransport({
+        //     service: 'gmail',
+        //     port: 465,
+        //     secure: true,
+        //     auth: {
+        //         user: username,
+        //         pass: password
         //     }
         // })
+    
+        // var mailOptions = {
+        //     from: `New Customer ${req.body.customerEmail}`,
+        //     to: `${email}`,
+        //     subject: `Service Inquiry from ${req.body.customerName}`,
+        //     text: req.body.message
+        // }
 
-        try {
+        // try {
 
-            transporter.sendMail(mailOptions, (error, info)=> {
+        //     transporter.sendMail(mailOptions, (error, info)=> {
                 
 
-                if(error) {
-                    res.status(500).send({
-                        message : 'Something went Wrong please try again.'
-                    }) 
-                }
+        //         if(error) {
+        //             res.status(500).send({
+        //                 message : 'Something went Wrong please try again.'
+        //             }) 
+        //         }
 
-                if (info) {
-                    res.status(200).send({
-                        message : 'Email sent Successfully we will be contacting you soon'
-                    })
-                }
-            })
+        //         if (info) {
+        //             res.status(200).send({
+        //                 message : 'Email sent Successfully we will be contacting you soon'
+        //             })
+        //         }
+        //     })
 
-        } catch (error) {
-            console.log(error)
-        }
+        // } catch (error) {
+        //     console.log(error)
+        // }
     }
 }
 

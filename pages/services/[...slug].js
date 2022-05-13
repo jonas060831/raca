@@ -372,7 +372,6 @@ const onContactValueChange = () => {
       }
 
     } catch (error) {
-        console.log(error.response.data.message)
         setSm(error.response.data.message)
         setMessage(message)
         setSr("no")
