@@ -355,24 +355,30 @@ const onContactValueChange = () => {
 
     setMessage(message)
 
-    const response = await axios.post('/api/emailus',{ message: message, url: slug, customerName: contact.name, customerEmail: contact.email } )
+    
 
     try {
+
+      const response = await axios.post('/api/emailus',{ message: message, url: slug, customerName: contact.name, customerEmail: contact.email } )
       
       const { data } = response
-      
-      console.log(data)
-      setSm(data.message)
-      setMessage("Message Sent Succesfully")
-      setSr("yes")
-      setIsLoading(false)
-      window.scrollTo(0,0)
+
+      if(data.status === 200) {
+        setSm(data.message)
+        setMessage("Message Sent Succesfully")
+        setSr("yes")
+        setIsLoading(false)
+        window.scrollTo(0,0)
+      }
 
     } catch (error) {
-      console.log(error)
-      setSr("no")
+        console.log(error.response.data.message)
+        setSm(error.response.data.message)
+        setMessage(message)
+        setSr("no")
+        setIsLoading(false)
+        window.scrollTo(0,0)
     }
-   
   }
 
   return (

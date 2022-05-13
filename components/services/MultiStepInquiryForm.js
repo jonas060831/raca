@@ -229,24 +229,25 @@ const MultiStepInquiryForm = (props) => {
   }
 
   const renderServerMessage = () => {
+       console.log(sr)
 
-       switch (sr) {
-           case 'yes':
-                return (
-                    <div className={styles.serverResponse}>
-                        <p> <CheckCircle /> {sm} Thank You!.</p>
-                    </div>
-                    
-                )
-           case 'no':
-                    <div className={styles.serverResponseNegative}>
-                        <p> <AlertTriangle/> {sm} Sorry!.</p>
-                    </div>
-       
-           default:
-               return (
-                   <></>
-               )
+       if (sr === "yes") {
+            return (
+                <div className={styles.serverResponse}>
+                    <p> <CheckCircle /> {sm} Thank You!.</p>
+                </div>
+                
+            )
+       } else if (sr === "no") {
+            return (
+                <div className={styles.serverResponseNegative}>
+                    <p> <AlertTriangle/> {sm} Sorry!.</p>
+                </div>
+            )
+       } else {
+           return (
+               <></>
+           )
        }
   }
 

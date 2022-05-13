@@ -11,13 +11,12 @@ const Layout = (props) => {
 
         <main>
             {props.children}
-        </main>
-        
-        <MessengerCustomerChat
-          pageId="108805890955489"
-          appId="336529318399861"
-        />
 
+            <MessengerCustomerChat
+              pageId="108805890955489"
+              appId="336529318399861"
+            />
+        </main>
         <Footer/>
     </Fragment>
   )
