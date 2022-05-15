@@ -148,7 +148,8 @@ const areas = [
     { id: 146, name: "Tingloy", district: "Batangas 2nd" },
     { id: 147, name: "Trece Martires", district: "Cavite 7th" },
     { id: 148, name: "Tuy", district: "Batangas 1st" },
-    { id: 149, name: "Victoria", district: "Tarlac 2nd" }
+    { id: 149, name: "Valenzuela", district: "Northern Manila" },
+    { id: 150, name: "Victoria", district: "Tarlac 2nd" }
 ]
 
 export const getAreas = () => {
