@@ -15,6 +15,7 @@
 
 #companyLogo {
   width: 20%;
+  margin: 0px auto;
   margin-top: 30vh;
 }
 
@@ -40,15 +41,12 @@
 
 
 .imageContainer {
+  padding-top: 7rem;
   width:20rem; 
   height:20rem;
-  overflow:hidden;
-  display:inline-block;
-  position:relative;
 }
 .imageContainer img {
   width: 100%;
-  position: absolute;
   bottom: 0;
 }
 
@@ -77,10 +75,12 @@
   cursor: pointer;
 }
 
-.serviceOfferedCard img {
+.serviceOfferedCard:nth-child(even), .serviceOfferedCard:nth-child(odd) {
   border-radius: 100%;
   width: 8em;
   height: 8em;
+  overflow: hidden;
+  margin: 1rem;
   border: 3px solid var(--secondary-color);
 }
 
@@ -194,7 +194,6 @@
   }
   .imageContainer img {
     width: 100%;
-    position: absolute;
     bottom: 0;
   }
   #phdTitle {

@@ -13,7 +13,14 @@ const clientId = process.env.NEXT_PUBLIC_CLIENT_ID
 
 const handler = (req, res) => {
 
+    if(req.method === "GET") {
+
+        res.status(200).json({ message: 'emailus' })
+    }
+
     if (req.method === "POST") {
+
+        const { customerName, customerEmail, message } = req.body
 
         const createTransporter = async () => {
             
@@ -61,26 +68,22 @@ const handler = (req, res) => {
                 let emailTransporter = await createTransporter();
                 await emailTransporter.sendMail(emailOptions);
 
-
-                res.status(200).send({
+                res.status(200).json({
                     message : 'Message received we will be contacting you soon'
                 })
-
-
             } catch (error) {
 
-                res.status(500).send({
+                res.status(500).json({
                     message : 'Something went wrong please try again'
                 })
             }
         };
 
-
         sendEmail({
-            subject: `Service Inquiry from ${req.body.customerName}`,
-            text: req.body.message,
+            subject: `Service Inquiry from ${customerName}`,
+            text: message,
             to: `System Email ${email}`,
-            from: `New Customer ${email}`
+            from: `New Customer ${customerEmail}`
           });
     }
 }

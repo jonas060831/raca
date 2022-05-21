@@ -359,7 +359,13 @@ const onContactValueChange = () => {
 
     try {
 
-      const response = await axios.post('/api/emailus',{ message: message, url: slug, customerName: contact.name, customerEmail: contact.email } )
+      const response = await axios.post('/api/emailus',
+      { 
+        message: message, 
+        url: slug,
+        customerName: contact.name,
+        customerEmail: contact.email
+      })
       
       const { data } = response
 

@@ -1,5 +1,5 @@
 import React from 'react'
-
+import Image from 'next/image'
 import styles from '../../styles/Home.module.css'
 
 
@@ -14,7 +14,14 @@ const ProductHighlights = ({ phd }) => {
                   <div className={styles.phdItem} key={item.id}>
 
                     <div className={styles.imageContainer}>
-                        <img src={item.image} alt={item.image} />
+
+                        <Image
+                          src={item.image}
+                          alt={item.image}
+                          width={320}
+                          height={200}
+                        />
+
                     </div>
                     
                     <p id={styles.phdTitle}>{item.title}</p>

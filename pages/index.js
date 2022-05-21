@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
 //components
@@ -52,10 +53,16 @@ const Home = () => {
         <main>
 
           <section className={styles.intro}>
-            <img
-                src="/companylogo.png"
+            <div
+                
                 id={styles.companyLogo}
-            />
+            >
+              <Image
+                src="/companylogo.png"
+                width={500}
+                height={300}
+              />
+            </div>
 
             <p id={styles.headerTitle} > Start your event with rentacoolair </p>
             <p id={styles.headerSubtitle}>Trusted by many loved by everyone.</p>
@@ -82,7 +89,12 @@ const Home = () => {
                     return (
                       <div className={styles.serviceOfferedCard} key={item.id} onClick={ () => router.push(url) }>
 
-                            <img src={item.thumbnail} alt={item.thumbnail} />
+                            <Image 
+                              src={item.thumbnail} 
+                              alt={item.thumbnail} 
+                              width={128}
+                              height={128}
+                            />
                             <br />
                             <h4>{item.name}</h4>
                       </div>  
@@ -132,13 +144,15 @@ const Home = () => {
             
             <div className={styles.linktoFBContainer} >
               {/* <Link href="https://www.facebook.com/rentacoolair"> */}
-                <img
+                <Image
                   onClick={ () => {
                       setShowModal(true);
                       document.body.style.overflow = "hidden"
                   }}
                   src="/media/images/homepage/checkusout.jpg"
                   alt="/public/media/images/homepage/checkusout.jpg"
+                  width={300}
+                  height={150}
                 />
 
               <BasicModal
