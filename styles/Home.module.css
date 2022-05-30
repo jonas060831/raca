@@ -75,7 +75,7 @@
   cursor: pointer;
 }
 
-.serviceOfferedCard:nth-child(even), .serviceOfferedCard:nth-child(odd) {
+.serviceOfferedCard img:nth-child(even), .serviceOfferedCard img:nth-child(odd) {
   border-radius: 100%;
   width: 8em;
   height: 8em;

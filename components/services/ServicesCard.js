@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 
 //styles
@@ -13,7 +14,12 @@ const ServicesCard = ({ item }) => {
       <div className={styles.card}>
           
           <div className={styles.imageContainer}>
-                <img src={item.thumbnail} alt={item.thumbnail} />
+                <Image
+                    src={item.thumbnail}
+                    alt={item.thumbnail} 
+                    width={500}
+                    height={450}
+                />
           </div>
 
           <div className={styles.details}>

@@ -7,8 +7,6 @@ const refreshToken = process.env.NEXT_PUBLIC_REFRESH_TOKEN
 const clientSecret = process.env.NEXT_PUBLIC_CLIENT_SECRET
 const clientId = process.env.NEXT_PUBLIC_CLIENT_ID
 
-
-
 //const env = process.env.NODE_ENV
 
 const handler = (req, res) => {
@@ -73,6 +71,7 @@ const handler = (req, res) => {
                 })
             } catch (error) {
 
+                console.log(error)
                 res.status(500).json({
                     message : 'Something went wrong please try again'
                 })
