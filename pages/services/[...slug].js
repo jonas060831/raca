@@ -376,6 +376,7 @@ const onContactValueChange = () => {
         window.scrollTo(0,0)
 
     } catch (error) {
+        console.log(error)
         setSm(error.response.data.message)
         setMessage(message)
         setSr("no")

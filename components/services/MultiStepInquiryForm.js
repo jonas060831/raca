@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect } from 'react'
 import Link from 'next/link';
-import { MapPin, Home, Flag, Plus, Minus, User, Phone, AtSign, Send, CheckCircle, AlertTriangle, X, XCircle } from 'react-feather'
+import Image from 'next/image';
+import { MapPin, Home, Flag, Plus, Minus, User, Phone, AtSign, Send, CheckCircle, AlertTriangle, X } from 'react-feather'
 
 
 import { DayPicker } from 'react-day-picker';
