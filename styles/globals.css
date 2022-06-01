@@ -34,3 +34,24 @@ a {
   text-align: center;
   line-height: 100vh;
 }
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+.notice-warning {
+  color:#d55b43;
+  border-radius: 10px;
+  font-size: 1.3rem;
+  word-wrap:break-word;
+  text-align: left;
+  animation: 1.5s fadeIn;
+  animation-fill-mode: forwards;
+}
+

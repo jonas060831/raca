@@ -398,7 +398,9 @@ const MultiStepInquiryForm = (props) => {
 
                 </StepForm>
             )
-        case 5: 
+        case 5:
+
+            
             return (
                 <StepForm
                 title="Contact Person"
@@ -435,6 +437,9 @@ const MultiStepInquiryForm = (props) => {
                             onChange={ handleContactChange }
                             onContactValueChange= { onContactValueChange }
                         />
+                        
+                        <br />
+
                     </section>
                 
                 </StepForm>
@@ -479,11 +484,7 @@ const MultiStepInquiryForm = (props) => {
                 </StepForm>
             )
         case 7:
-            return (
-                <div>
-                    123 
-                </div>
-            )
+            return <></>
       default:
             return (
                 <StepForm

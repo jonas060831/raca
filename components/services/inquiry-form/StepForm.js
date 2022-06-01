@@ -59,6 +59,12 @@ const StepForm = (props) => {
           case 'submit':
               return (
                     <div>
+                        <div className="notice-warning">
+                            <p>
+                            Rent a CoolAir typically replies within 12 hours. If you do not see a reply on your inbox, please check your junk mail or spam folder. 
+                            </p>
+                        </div>
+
                         <Button
                         title="Previous"
                         type="main"
