@@ -1,7 +1,7 @@
 //const env = process.env.NODE_ENV
 import createTransporter from "../../helpers/nodeMailer";
 
-
+//form-data sender and receiver email 
 const email = process.env.NEXT_PUBLIC_GOOGLE_EMAIL
 
 const handler = (req, res) => {
@@ -48,7 +48,7 @@ const handler = (req, res) => {
         if (customerEmail.length !== 0) {
 
             //emailOptions - who sends what to whom
-            const sendEmail2 = async (emailOptions) => {
+            const sendAutoReply = async (emailOptions) => {
                 
                 try {
                     let emailTransporter = await createTransporter();
@@ -70,7 +70,7 @@ const handler = (req, res) => {
                                      `We look forward to chatting soon!\n\n`+
                                      `Cheers,\n`+
                                      `Goalbert Gotauco`
-            sendEmail2({
+            sendAutoReply({
                 subject: 'We got it',
                 text: autoreplymessage,
                 to: customerEmail,
