@@ -1,0 +1,14 @@
+/* Desktop and iPads */
+.container {
+    width: 80%;
+    max-width: 1300px;
+    margin: 0 auto;
+
+}
+
+/* MOBILES */
+@media only screen and (max-width: 600px) {
+    .container {
+        width: 90%;
+    }
+}

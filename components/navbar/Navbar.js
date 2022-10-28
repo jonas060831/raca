@@ -89,7 +89,7 @@ const Navbar = () => {
                     
                     <Link href="/contactus" >
                         <li onClick={ () => closeNav() } className={router.pathname === "/contactus" ? styles.active : ""}>
-                                Contact Us
+                                {/* Contact Us */}
                         </li>
                     </Link>
 

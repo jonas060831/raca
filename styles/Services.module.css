@@ -1,3 +1,5 @@
+/* Desktop and iPads */
+
 .container {
   width: 80%;
   max-width: 1300px;
@@ -7,6 +9,9 @@
   margin-top: 20vh;
   margin-bottom: 20vh;
 }
+
+
+/* MOBILES */
 
 .servicesGrid {
   display: grid;

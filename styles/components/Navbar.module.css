@@ -28,8 +28,10 @@
 .nav ul li:hover  { color: grey; }
 
 .nav .active {
-    text-decoration: underline;
-    text-decoration-thickness: 15%;
+    /* text-decoration: underline; */
+    font-weight: bolder;
+    text-shadow: 0 0 0.5px rgba(255, 255, 255, 0.994);
+    /* text-decoration-thickness: 15%; */
 }
 
 .container {
