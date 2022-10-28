@@ -29,7 +29,7 @@
 
 .nav .active {
     /* text-decoration: underline; */
-    font-weight: bolder;
+    font-weight:300;
     text-shadow: 0 0 0.5px rgba(255, 255, 255, 0.994);
     /* text-decoration-thickness: 15%; */
 }

@@ -59,6 +59,7 @@ const Home = () => {
             >
               <Image
                 src="/companylogo.png"
+                alt="/companylogo.png"
                 width={500}
                 height={300}
               />
