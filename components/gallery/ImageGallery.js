@@ -17,14 +17,14 @@ const ImageGallery = () => {
 
     return (
         <div className={styles.image_container} >
-            { photos.map( photo => {
-            
+            { photos.map( (photo, index) => {
             return (
-                <div className={styles.image_wrapper}>
+                <div className={styles.image_wrapper} key={index}>
 
                     <img
                         src={photo.image_directory}
                         alt={photo.image_directory}
+                        
                     />
 
                     {/* <div>
