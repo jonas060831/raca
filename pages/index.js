@@ -62,6 +62,8 @@ const Home = () => {
                 alt="/companylogo.png"
                 width={500}
                 height={300}
+                layout='responsive'
+                loading='lazy'
               />
             </div>
 
@@ -90,13 +92,16 @@ const Home = () => {
                     return (
                       <div className={styles.serviceOfferedCard} key={item.id} onClick={ () => router.push(url) }>
 
-                            <Image 
-                              src={item.thumbnail} 
-                              alt={item.thumbnail} 
-                              width={128}
-                              height={128}
-                            />
-                            <br />
+                            <div>
+                              <Image 
+                                src={item.thumbnail} 
+                                alt={item.thumbnail} 
+                                width={128}
+                                height={128}
+                                layout='responsive'
+                                loading='lazy'
+                              />
+                            </div>
                             <h4>{item.name}</h4>
                       </div>  
                     )

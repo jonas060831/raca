@@ -272,7 +272,15 @@ const MultiStepInquiryForm = (props) => {
                     slug={slug}
                 >
                     <section className={styles.step1Content}>
-                            <img src={service.thumbnail} alt={service.thumbnail} />
+                            
+                            <div>
+                                <Image
+                                    src={service.thumbnail}
+                                    alt={service.thumbnail}
+                                    width="250px"
+                                    height="250px"
+                                />
+                            </div>
                     </section>
 
                 </StepForm>

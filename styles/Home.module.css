@@ -19,6 +19,9 @@
   margin-top: 30vh;
 }
 
+
+
+
 #headerTitle {
   font-size: 3.5rem;
   font-weight: bold;
@@ -68,21 +71,49 @@
 .serviceGrid {
   display: grid;
   grid-template-columns: auto auto auto auto;
+  gap: 2rem;
 }
 
 .serviceOfferedCard {
   text-align: center;
-  cursor: pointer;
+  
+  margin: 0px auto;
 }
 
-.serviceOfferedCard img:nth-child(even), .serviceOfferedCard img:nth-child(odd) {
+
+
+
+
+.serviceOfferedCard > div:nth-child(even), .serviceOfferedCard > div:nth-child(odd) {
   border-radius: 100%;
   width: 8em;
   height: 8em;
   overflow: hidden;
+  background-color: red;
   margin: 1rem;
-  border: 3px solid var(--secondary-color);
+  animation: animate 3s ease infinite;
+  border: 3px solid var(--secondary-color);cursor: pointer;
 }
+.serviceOfferedCard > div:nth-child(even):hover, .serviceOfferedCard > div:nth-child(odd):hover {
+  opacity: 0.7;
+}
+
+.serviceOfferedCard:hover {
+  color: grey;
+}
+
+@keyframes animate {
+  0% {
+      background-color: #d75b13;
+  }
+  50% {
+      background-color: #1273b4;
+  }
+  100% {
+      background-color: #bbc0bc;
+  }
+}
+
 
 .requesAFreeQuote  {
   margin-top: 50vh;

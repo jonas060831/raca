@@ -6,15 +6,27 @@
     display: flex;
     justify-content: center;
 }
-.step1Content img {
+.step1Content > div {
     margin: auto;
     border-radius: 50%;
     width: 250px;
     height: 250px;
-    display: block;
+    overflow: hidden;
+    animation: animate 3s ease infinite;
     border: 3px solid var(--secondary-color);
 }
 
+@keyframes animate {
+    0% {
+        background-color: #d75b13;
+    }
+    50% {
+        background-color: #1273b4;
+    }
+    100% {
+        background-color: #bbc0bc;
+    }
+}
 
 .step3Content {
     display: flex;

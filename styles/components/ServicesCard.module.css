@@ -15,6 +15,25 @@
     font-weight: 600;
 }
 
+
+.imageContainer {
+    animation: animate 3s ease infinite;
+}
+
+@keyframes animate {
+    0% {
+        background-color: #d75b13;
+    }
+    50% {
+        background-color: #1273b4;
+    }
+    100% {
+        background-color: #bbc0bc;
+    }
+}
+
+
+
 .imageContainer img {
     width: 100%;
     height: 100%;

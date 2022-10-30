@@ -47,7 +47,7 @@ const services = [
     {
         id: 10,
         name: "Religious Events",
-        thumbnail: "/media/images/services/images/Religious_Events.png"
+        thumbnail: "/media/images/services/images/ReligiousEvents.png"
     }
 ]
 

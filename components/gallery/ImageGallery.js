@@ -15,32 +15,31 @@ const ImageGallery = () => {
         setPhotos(p)
     }, [])
 
+
+
     return (
-        <div className={styles.image_container} >
+        <div className={styles.images_grid} >
             { photos.map( (photo, index) => {
-            return (
-                <div className={styles.image_wrapper} key={index}>
-
-                    <img
-                        src={photo.image_directory}
-                        alt={photo.image_directory}
-                        
-                    />
-
-                    {/* <div>
-                        <Image
-                            id={photo.id}
-                            src={photo.image_directory}
-                            alt={photo.image_directory} 
-                            width={photo.width}
-                            height={photo.height}
-                        />
-                    </div> */}
-
-                </div>
-                    
-                    
-            )})}
+                return (
+                    <div
+                        className={styles.image_wrapper}
+                        key={index}
+                        width={photo.width}
+                        height={photo.height}
+                    >
+                        <div>
+                            <Image
+                                id={photo.id}
+                                src={photo.image_directory}
+                                alt={photo.image_directory} 
+                                layout='responsive'
+                                loading='lazy'
+                                width={photo.width}
+                                height={photo.height}
+                            />
+                        </div>
+                    </div>
+                )})}
         </div>
     )
 }

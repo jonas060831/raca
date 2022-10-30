@@ -45,7 +45,7 @@ const photos = [
         id: 7,
         title: 'Wedding # 4',
         image_directory: "/media/images/photos/IMG_5340-min.jpg",
-        width: 292,
+        width: 432,
         height: 390
     },
     {
@@ -94,7 +94,7 @@ const photos = [
         id: 14,
         title: 'Catering',
         image_directory: "/media/images/services/images/Catering.png",
-        width: 390,
+        width: 429,
         height: 292
     },
     {
