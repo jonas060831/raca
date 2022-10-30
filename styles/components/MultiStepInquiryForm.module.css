@@ -16,6 +16,7 @@
     border: 3px solid var(--secondary-color);
 }
 
+
 @keyframes animate {
     0% {
         background-color: #d75b13;
