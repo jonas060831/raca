@@ -45,13 +45,13 @@ const photos = [
         id: 7,
         title: 'Wedding # 4',
         image_directory: "/media/images/photos/IMG_5340-min.jpg",
-        width: 432,
+        width: 292,
         height: 390
     },
     {
         id: 8,
         title: 'Religious_Events',
-        image_directory: "/media/images/services/images/Religious_Events.png",
+        image_directory: "/media/images/services/images/ReligiousEvents.png",
         width: 960,
         height: 720
     },
@@ -94,7 +94,7 @@ const photos = [
         id: 14,
         title: 'Catering',
         image_directory: "/media/images/services/images/Catering.png",
-        width: 429,
+        width: 390,
         height: 292
     },
     {
