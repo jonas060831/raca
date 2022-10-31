@@ -47,7 +47,7 @@ const services = [
     {
         id: 10,
         name: "Religious Events",
-        thumbnail: "/media/images/services/images/ReligiousEvents.png"
+        thumbnail: "https://rentacoolair.s3.us-west-1.amazonaws.com/defaults/images/religious_events.JPG"
     }
 ]
 

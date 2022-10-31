@@ -9,6 +9,8 @@ const ServicesCard = ({ item }) => {
 
   const router = useRouter()
 
+  console.log(item.thumbnail)
+
   return (
       <div className={styles.card}>
           

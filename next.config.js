@@ -17,4 +17,7 @@ module.exports = {
       },
     ]
   },
+  images: {
+    domains: ['rentacoolair.s3.us-west-1.amazonaws.com'],
+  },
 }
