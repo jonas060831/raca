@@ -25,7 +25,7 @@ const Home = () => {
 
   const insertSeeAll = (arr, remaining, index) => {
     var s = arr
-    var seeall = { id: 8, name: "See All", thumbnail: "/media/images/services/images/thumbnail.png" }
+    var seeall = { id: 8, name: "See All", thumbnail: "https://rentacoolair.s3.us-west-1.amazonaws.com/media/images/services/thumbnail.png" }
     s.splice(index, remaining, seeall)
     return s
   }
@@ -156,7 +156,7 @@ const Home = () => {
                       document.body.style.overflow = "hidden"
                   }}
                   src="/media/images/homepage/checkusout.jpg"
-                  alt="/public/media/images/homepage/checkusout.jpg"
+                  alt="/media/images/homepage/checkusout.jpg"
                   width={300}
                   height={150}
                 />

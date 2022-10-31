@@ -2,52 +2,52 @@ const services = [
     {
         id: 1,
         name: "Wedding",
-        thumbnail: "/media/images/services/images/Wedding.png"
+        thumbnail: "https://rentacoolair.s3.us-west-1.amazonaws.com/media/images/services/Wedding.png"
     },
     {
         id: 2,
         name: "Birthday",
-        thumbnail: "/media/images/services/images/Birthday.png"
+        thumbnail: "https://rentacoolair.s3.us-west-1.amazonaws.com/media/images/services/Birthday.png"
     },
     {
         id: 3,
         name: "Fiesta",
-        thumbnail: "/media/images/services/images/Fiesta.png"
+        thumbnail: "https://rentacoolair.s3.us-west-1.amazonaws.com/media/images/services/Fiesta.png"
     },
     {
         id: 4,
         name: "Debut",
-        thumbnail: "/media/images/services/images/Debut.png"
+        thumbnail: "https://rentacoolair.s3.us-west-1.amazonaws.com/media/images/services/Debut.png"
     },
     {
         id: 5,
         name: "Catering",
-        thumbnail: "/media/images/services/images/Catering.png"
+        thumbnail: "https://rentacoolair.s3.us-west-1.amazonaws.com/media/images/services/Catering.png"
     },
     {
         id: 6,
         name: "Office",
-        thumbnail: "/media/images/services/images/Office.png"
+        thumbnail: "https://rentacoolair.s3.us-west-1.amazonaws.com/media/images/services/Office.png"
     },
     {
         id: 7,
         name: "Inauguration",
-        thumbnail: "/media/images/services/images/Inauguration.png"
+        thumbnail: "https://rentacoolair.s3.us-west-1.amazonaws.com/media/images/services/Inauguration.png"
     },
     {
         id: 8,
         name: "Sport Events",
-        thumbnail: "/media/images/services/images/Sport_Events.png"
+        thumbnail: "https://rentacoolair.s3.us-west-1.amazonaws.com/media/images/services/Sport_Events.png"
     },
     {
         id: 9,
         name: "Clubhouse",
-        thumbnail: "/media/images/services/images/Clubhouse.png"
+        thumbnail: "https://rentacoolair.s3.us-west-1.amazonaws.com/media/images/services/Clubhouse.png"
     },
     {
         id: 10,
         name: "Religious Events",
-        thumbnail: "https://rentacoolair.s3.us-west-1.amazonaws.com/defaults/images/religious_events.JPG"
+        thumbnail: "https://rentacoolair.s3.us-west-1.amazonaws.com/media/images/services/ReligiousEvents.png"
     }
 ]
 

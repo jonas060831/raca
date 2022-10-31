@@ -51,7 +51,7 @@ const photos = [
     {
         id: 8,
         title: 'Religious_Events',
-        image_directory: "/media/images/services/images/ReligiousEvents.png",
+        image_directory: "https://rentacoolair.s3.us-west-1.amazonaws.com/media/images/services/ReligiousEvents.png",
         width: 960,
         height: 720
     },
@@ -65,63 +65,63 @@ const photos = [
     {
         id: 10,
         title: 'Wedding # 7',
-        image_directory: "/media/images/services/images/Wedding.png",
+        image_directory: "https://rentacoolair.s3.us-west-1.amazonaws.com/media/images/services/Wedding.png",
         width: 1195,
         height: 735
     },
     {
         id: 11,
         title: 'Birthday',
-        image_directory: "/media/images/services/images/Birthday.png",
+        image_directory: "https://rentacoolair.s3.us-west-1.amazonaws.com/media/images/services/Birthday.png",
         width: 1024,
         height: 768
     },
     {
         id: 12,
         title: 'Fiesta',
-        image_directory: "/media/images/services/images/Fiesta.png",
+        image_directory: "https://rentacoolair.s3.us-west-1.amazonaws.com/media/images/services/Fiesta.png",
         width: 1024,
         height: 768
     },
     {
         id: 13,
         title: 'Debut',
-        image_directory: "/media/images/services/images/Debut.png",
+        image_directory: "https://rentacoolair.s3.us-west-1.amazonaws.com/media/images/services/Debut.png",
         width: 949,
         height: 649
     },
     {
         id: 14,
         title: 'Catering',
-        image_directory: "/media/images/services/images/Catering.png",
+        image_directory: "https://rentacoolair.s3.us-west-1.amazonaws.com/media/images/services/Catering.png",
         width: 390,
         height: 292
     },
     {
         id: 15,
         title: 'Inauguration',
-        image_directory: "/media/images/services/images/Inauguration.png",
+        image_directory: "https://rentacoolair.s3.us-west-1.amazonaws.com/media/images/services/Inauguration.png",
         width: 480,
         height: 360
     },
     {
         id: 16,
         title: 'Sport_Events',
-        image_directory: "/media/images/services/images/Sport_Events.png",
+        image_directory: "https://rentacoolair.s3.us-west-1.amazonaws.com/media/images/services/Sport_Events.png",
         width: 1024,
         height: 768
     },
     {
         id: 17,
         title: 'Clubhouse',
-        image_directory: "/media/images/services/images/Clubhouse.png",
+        image_directory: "https://rentacoolair.s3.us-west-1.amazonaws.com/media/images/services/Clubhouse.png",
         width: 1024,
         height: 768
     },
     {
         id: 18,
         title: 'Wedding # 5',
-        image_directory: "/media/images/photos/IMG_5487-min.jpg",
+        image_directory: "https://rentacoolair.s3.us-west-1.amazonaws.com/media/images/services/Wedding.png",
         width: 1024,
         height: 768
     },
