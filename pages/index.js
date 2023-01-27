@@ -93,7 +93,7 @@ const Home = () => {
                       <div className={styles.serviceOfferedCard} key={item.id} onClick={ () => router.push(url) }>
 
                             <div>
-                              <img 
+                              <Image 
                                 src={item.thumbnail} 
                                 alt={item.thumbnail} 
                                 width={128}
