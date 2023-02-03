@@ -69,6 +69,7 @@ const Home = () => {
 
             <p id={styles.headerTitle} > Start your event with rentacoolair </p>
             <p id={styles.headerSubtitle}>Trusted by many loved by everyone.</p>
+            <p>hello 123</p>
           </section>
 
             
