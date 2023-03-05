@@ -14,13 +14,13 @@ const Footer = () => {
             </div>
 
             <div>
-                <h3>Rowena & Jun</h3>
-                <p>North Area</p>
-                <p>0991-327-7474</p>
-                <p>rentacoolair@gmail.com</p>
+              <h3>We Service: </h3>
+              <p><span>NCR - </span> National Capital Region</p>
+              <p><span>North Area - </span>Cavite, Laguna, <br/> as far as Batangas City</p>
+              <p><span>South Area - </span>Bulacan, Pampanga <br/> as far as Tarlac City</p>
             </div>
-
             <div>
+                <br></br>
                 <p>Email us at:</p>
                 <h3>rentacoolair@gmail.com</h3>
             </div>

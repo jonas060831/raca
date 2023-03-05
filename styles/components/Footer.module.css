@@ -16,6 +16,9 @@
     font-size: 0.9rem;
   }
 
+  .footer p > span:first-child {
+    font-weight: 900;
+  }
 
 
   /* MOBILES */
