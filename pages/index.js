@@ -68,7 +68,7 @@ const Home = () => {
             </div>
 
             <p id={styles.headerTitle} > Start your event with rentacoolair </p>
-            <p id={styles.headerSubtitle}>Trusted by many loved by everyone.</p>
+            <p id={styles.headerSubtitle}>trusted by many and loved by everyone.</p>
           </section>
 
             
@@ -124,7 +124,7 @@ const Home = () => {
             
             <div style={{ textAlign: 'center', fontSize: '1.5em' }}>
               <h1>Testimonials</h1>
-              <h6 >Here&rsquo;s what our customer are saying about us</h6>
+              <h6 >Here&rsquo;s what our customers are saying about us:</h6>
             </div>
                   
             <iframe

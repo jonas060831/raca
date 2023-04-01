@@ -16,8 +16,8 @@ const Footer = () => {
             <div>
               <h3>We Service: </h3>
               <p><span>NCR - </span> National Capital Region</p>
-              <p><span>North Area - </span>Cavite, Laguna, <br/> as far as Batangas City</p>
-              <p><span>South Area - </span>Bulacan, Pampanga <br/> as far as Tarlac City</p>
+              <p><span>North Area - </span>Bulacan, Pampanga <br/> as far as Tarlac City</p>
+              <p><span>South Area - </span>Cavite, Laguna, <br/> as far as Batangas City</p>
             </div>
             <div>
                 <br></br>
