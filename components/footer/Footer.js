@@ -9,8 +9,8 @@ const Footer = () => {
             <div>
                 <h3>Mike</h3>
                 <p>NCR (Metro Manila) & South Area</p>
-                <p>0991-327-7474 & 0917-856-6681</p>
-                <p>iwatarentacoolair@gmail.com</p>
+                <p>0991-327-7474 </p>
+                <p>0917-856-6881</p>
             </div>
 
             <div>
@@ -23,6 +23,8 @@ const Footer = () => {
                 <br></br>
                 <p>Email us at:</p>
                 <h3>rentacoolair@gmail.com</h3>
+                <h3>iwatarentacoolair@gmail.com</h3>
+                <br></br>
             </div>
     </footer>
   )

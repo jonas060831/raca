@@ -24,8 +24,8 @@ const Services = () => {
     <div>
         <HeadSEO
           TabTitle="Services"
-          title="Iwata Air Cooler for rent"
-          description="Air Cooler"
+          title="Iwata Air Cooler for rent Services Page"
+          description="Services offered by Iwata Air Cooler"
         />
 
         <main>

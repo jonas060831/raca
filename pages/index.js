@@ -43,8 +43,8 @@ const Home = () => {
     <div>
 
       <HeadSEO
-        TabTitle="Home"
-        title="IWATA Air Cooler for Rent"
+        TabTitle="Air Cooler for Events"
+        title="IWATA Air Cooler for Rent Home Page"
         description="IWATA evaporative air cooler for rent. Beat the heat! Guaranteed to blast cooler air and give comfort to your guests on special events. Great for indoor and outdoor activities."
       />
 
@@ -68,7 +68,7 @@ const Home = () => {
             </div>
 
             <p id={styles.headerTitle} > Start your event with rentacoolair </p>
-            <p id={styles.headerSubtitle}>trusted by many and loved by everyone.</p>
+            <p id={styles.headerSubtitle}>trusted by many and loved by everyone</p>
           </section>
 
             

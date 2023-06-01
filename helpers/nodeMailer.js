@@ -13,7 +13,7 @@ const createTransporter = async () => {
     const oauth2Client = new OAuth2(
         clientId,
         clientSecret,
-        "https://developers.google.com/oauthplayground"
+        "https://developers.google.com/oauthplayground",
     );
 
     oauth2Client.setCredentials({
@@ -24,6 +24,8 @@ const createTransporter = async () => {
         oauth2Client.getAccessToken((err, token) => {
           if (err) {
             reject("Failed to create access token :(");
+
+            console.log(err)
           }
           resolve(token);
         });

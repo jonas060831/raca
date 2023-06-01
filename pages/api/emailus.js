@@ -4,7 +4,7 @@ import createTransporter from "../../helpers/nodeMailer";
 //form-data sender and receiver email 
 const email = process.env.NEXT_PUBLIC_GOOGLE_EMAIL
 
-const handler = (req, res) => {
+const handler = async(req, res) => {
 
     if(req.method === "GET") {
 
@@ -28,6 +28,8 @@ const handler = (req, res) => {
                     message : 'Message received we will be contacting you soon'
                 })
             } catch (error) {
+
+                console.log(error)
 
                 res.status(500).json({
                     message : 'Something went wrong please try again',

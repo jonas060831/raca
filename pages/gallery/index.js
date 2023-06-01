@@ -11,8 +11,8 @@ const Gallery = () => {
         <div>
             <HeadSEO
                 TabTitle="Gallery"
-                title="Iwata Air Cooler for rent"
-                description="Air Cooler"
+                title="Iwata Air Cooler for rent Gallery Page"
+                description="Check out these pictures from our happy customers."
             />
             
             <main>

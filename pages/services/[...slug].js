@@ -389,7 +389,7 @@ const onContactValueChange = () => {
         <HeadSEO
           TabTitle="Inquiry Form"
           title="Iwata Air Cooler for Rent"
-          description="Inquiry Form"
+          description="Get in touch with our team by sending this message."
         />
 
         <main>
