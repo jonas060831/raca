@@ -28,7 +28,7 @@ const handler = async(req, res) => {
                     message : 'Message received we will be contacting you soon'
                 })
             } catch (error) {
-
+  
                 console.log(error)
 
                 res.status(500).json({

@@ -58,17 +58,26 @@ const Home = () => {
                 id={styles.companyLogo}
             >
               <Image
-                src="/companylogo.png"
-                alt="/companylogo.png"
+                src="/companylogo.jpg"
+                alt="/companylogo.jpg"
                 width={500}
-                height={300}
+                height={500}
                 layout='responsive'
                 loading='lazy'
+                style={{
+                  borderRadius: '100vw',
+                  objectFit: 'cover',
+                  pointerEvents: 'none'
+                }}
               />
             </div>
 
-            <p id={styles.headerTitle} > Start your event with rentacoolair </p>
-            <p id={styles.headerSubtitle}>trusted by many and loved by everyone</p>
+            <p id={styles.headerTitle} >
+              Start your event with rentacoolair
+            </p>
+            <p id={styles.headerSubtitle}>
+              trusted by many and loved by everyone
+            </p>
           </section>
 
             

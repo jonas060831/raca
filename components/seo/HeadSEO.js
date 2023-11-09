@@ -9,7 +9,7 @@ const HeadSEO = ({ title, description, TabTitle}) => {
         <meta name="description" content={description} />
         <meta property="og:title" content={title} />
         <link rel="icon" href="/favicon.ico" />
-      </Head>
+     </Head>
   )
 }
 
