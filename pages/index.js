@@ -58,8 +58,8 @@ const Home = () => {
                 id={styles.companyLogo}
             >
               <Image
-                src="/companylogo2.jpg"
-                alt="/companylogo2.jpg"
+                src="/companylogo.jpg"
+                alt="/companylogo.jpg"
                 width={500}
                 height={200}
                 layout='responsive'
